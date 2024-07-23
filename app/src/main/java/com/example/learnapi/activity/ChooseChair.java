@@ -1,16 +1,20 @@
 package com.example.learnapi.activity;
 
 import static com.example.learnapi.activity.DetailMovie_Activity.GetMovie;
+import static com.example.learnapi.adapter.ExpandableListAdapter.getTheaterIdByName;
 import static com.example.learnapi.setupgeneral.Setup_Text.RandomSeatId;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -58,8 +62,41 @@ public class ChooseChair extends baseActivity<ChoochairController> {
             binding.nametheater.setText(nameTheater);
 
             binding.inforticket.setText(showDate + " - " + hourDate);
+            GetRoom();
+//            try {
+//
+//            }catch (Exception e)
+//            {
+//                throw new RuntimeException("An error occurred while retrieving room information: " + e.getMessage(), e);
+//            }
         }
-        //controller.GetRoomBySchedule();
+        SetEvent();
+
+
+
+
+
+
+}
+    public void SetEvent()
+    {
+
+
+        DisplayChair();
+        GetID();
+        binding.btnpayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(ChooseChair.this,DetailPayment.class);
+                intent1.putExtra("numberchair",coutchair);
+                intent1.putExtra("total",Sum);
+                startActivity(intent1);
+            }
+        });
+
+    }
+    public void DisplayChair()
+    {
         for (int i = 0; i < numRows; i++) {
 
             LinearLayout rowLayout = new LinearLayout(this);
@@ -86,20 +123,17 @@ public class ChooseChair extends baseActivity<ChoochairController> {
                 rowLayout.addView(seatImageView);
             }
 
-           binding.seatLayoutContainer.addView(rowLayout);
+            binding.seatLayoutContainer.addView(rowLayout);
         }
-        GetID();
-        binding.btnpayment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(ChooseChair.this,DetailPayment.class);
-                intent1.putExtra("numberchair",coutchair);
-                intent1.putExtra("total",Sum);
-                startActivity(intent1);
-            }
-        });
+    }
 
-}
+    public void GetRoom()
+    {
+        String timeShow = dbHelper.ConvertStringToDate(showDate) + " " + hourDate;
+
+        controller.GetRoomBySchedule(getTheaterIdByName(nameTheater),timeShow,movie.getIdMovie());
+    }
+
 
     public int SetPrice()
     {
@@ -114,6 +148,10 @@ public class ChooseChair extends baseActivity<ChoochairController> {
             price =Integer.parseInt(movie.getPrice());
         }
         return price;
+    }
+    public void DisplayRoom(String nameRoom)
+    {
+        binding.namescreen.setText("Room " + nameRoom);
     }
 
     private void GetID() {
@@ -163,6 +201,23 @@ public class ChooseChair extends baseActivity<ChoochairController> {
                 }
             }
         }
+    }
+    public  void showAlertDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Thông báo");
+        builder.setMessage(message);
+
+        // Nút OK
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 

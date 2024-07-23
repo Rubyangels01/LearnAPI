@@ -4,6 +4,8 @@ import static com.example.learnapi.adapter.DateAdapter.selectedDate;
 import static com.example.learnapi.adapter.ExpandableListAdapter.selectedHeader;
 import static com.example.learnapi.adapter.ExpandableListAdapter.selectedHour;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.disklrucache.DiskLruCache;
 import com.example.learnapi.R;
 import com.example.learnapi.adapter.DateAdapter;
 import com.example.learnapi.adapter.ExpandableListAdapter;
@@ -36,9 +39,12 @@ import com.example.learnapi.module.Theater;
 import com.example.learnapi.setupgeneral.dbHelper;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class TestActivity extends baseActivity<ChooTimeController> implements OnTextClickListener {
 
@@ -46,7 +52,7 @@ public class TestActivity extends baseActivity<ChooTimeController> implements On
     DateAdapter listdateAdapter;
     private RecyclerView recyclerView;
     ExpandableListView expListView;
-    List<String> listDataHeader;
+    Map<String, Integer> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     Button btn_booking;
     List<DateShow> listdate;
@@ -84,7 +90,7 @@ public class TestActivity extends baseActivity<ChooTimeController> implements On
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         expListView = (ExpandableListView) findViewById(R.id.expandableListView);
-        listDataHeader = new ArrayList<>();
+        listDataHeader = new HashMap<>();
         listDataChild = new HashMap<>();
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild,this.btn_booking);
         SetEvent();
@@ -119,7 +125,7 @@ public class TestActivity extends baseActivity<ChooTimeController> implements On
 
         if (listtheater != null) {
             for (Theater theater : listtheater) {
-                listDataHeader.add(theater.getNameTheater());
+                listDataHeader.put(theater.getNameTheater(),theater.getIdTheater());
                 listDataChild.put(theater.getNameTheater(), theater.getShowtimes());
             }
         }

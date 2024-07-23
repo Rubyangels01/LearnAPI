@@ -13,32 +13,33 @@ import androidx.core.content.ContextCompat;
 
 import com.example.learnapi.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
-    private List<String> _listDataHeader;
+    private static Map<String, Integer> _listDataHeader; // nameTheater -> idTheater
     private HashMap<String, List<String>> _listDataChild;
     private TextView selectedTextView = null;
     private Button button;
     public static String selectedHeader;
     public static String selectedHour;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader,
-                                 HashMap<String, List<String>> listChildData,Button button) {
+
+    public ExpandableListAdapter(Context context, Map<String, Integer> listDataHeader,
+                                 HashMap<String, List<String>> listChildData, Button button) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
         this.button = button;
     }
 
-
     @Override
-    public Object getChild(int groupPosition, int childPosititon) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
-                .get(childPosititon);
+    public Object getChild(int groupPosition, int childPosition) {
+        return this._listDataChild.get(getGroup(groupPosition)).get(childPosition);
     }
 
     @Override
@@ -47,8 +48,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, final int childPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         final String childText = (String) getChild(groupPosition, childPosition);
 
@@ -58,10 +58,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = infalInflater.inflate(R.layout.list_item_date, null);
         }
 
-        TextView txtListChild = (TextView) convertView
-                .findViewById(R.id.lblListItem);
-
-
+        TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
         txtListChild.setText(childText);
         txtListChild.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,20 +73,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                     selectedTextView = null;
                     txtListChild.setTextColor(_context.getResources().getColor(R.color.white));
                     button.setBackgroundTintList(ContextCompat.getColorStateList(_context, R.color.gray));
-                }
-                else {
+                } else {
                     button.setEnabled(true);
                     selectedTextView = txtListChild;
                     txtListChild.setTextColor(_context.getResources().getColor(R.color.green));
-                    selectedHeader = _listDataHeader.get(groupPosition);
+                    selectedHeader = getGroup(groupPosition);
                     selectedHour = txtListChild.getText().toString();
                     button.setBackgroundTintList(ContextCompat.getColorStateList(_context, R.color.green));
-
-
                 }
-
-
-
             }
         });
 
@@ -98,13 +89,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
-                .size();
+        return this._listDataChild.get(getGroup(groupPosition)).size();
     }
 
     @Override
-    public Object getGroup(int groupPosition) {
-        return this._listDataHeader.get(groupPosition);
+    public String getGroup(int groupPosition) {
+        List<String> headers = new ArrayList<>(this._listDataHeader.keySet());
+        return headers.get(groupPosition);
     }
 
     @Override
@@ -117,8 +108,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         return groupPosition;
     }
 
-
-
     @Override
     public boolean hasStableIds() {
         return false;
@@ -126,15 +115,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        String headerTitle = (String) getGroup(groupPosition);
+        String headerTitle = getGroup(groupPosition);
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.item_date, null);
         }
 
-        TextView lblListHeader = (TextView) convertView
-                .findViewById(R.id.lblListHeader);
+        TextView lblListHeader = (TextView) convertView.findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
 
@@ -145,5 +133,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
-}
 
+    // New method to get idTheater from nameTheater
+    public static Integer getTheaterIdByName(String nameTheater) {
+        return _listDataHeader.get(nameTheater);
+    }
+}

@@ -28,6 +28,6 @@ public class TicketRepository implements Repository{
     }
     public void GetRoomBySchedule(int idTheater,int idMovie, String showDate, Callback<ResData> callback)
     {
-        ticketService.getRoomBySchedule(idMovie, showDate,idMovie).enqueue(callback);
+        ticketService.getRoomBySchedule(idMovie,idTheater, showDate).enqueue(callback);
     }
 }

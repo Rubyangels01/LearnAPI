@@ -34,9 +34,10 @@ public class ChoochairController extends baseController<ChooseChair, TicketRepos
                 if (response.isSuccessful() && response.body() != null) {
                     ResData resData = response.body();
                     if (resData.getCode() == 200) {
-                        Gson gson = new Gson();
-                        Rooms rooms = gson.fromJson(gson.toJson(resData.getData()), Rooms.class);
-                       // view.
+                        ArrayList<Rooms> roomsList = dbHelper.convertToObject(resData,Rooms.class);
+
+
+                       view.DisplayRoom(roomsList.get(0).getNameRoom());
 
                     }
                 } else {
