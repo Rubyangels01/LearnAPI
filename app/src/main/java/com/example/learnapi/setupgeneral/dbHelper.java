@@ -122,9 +122,23 @@ public class dbHelper {
             return null; // hoặc bạn có thể ném ra một ngoại lệ tùy vào nhu cầu
         }
     }
-    public static String formatDate(Date date) {
-        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        return outputFormat.format(date);
+    public static String formatDate(String dateString) {
+
+        try {
+            // Định dạng đầu vào
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+            // Chuyển đổi chuỗi thành đối tượng Date
+            Date date = inputFormat.parse(dateString);
+
+            // Định dạng đầu ra
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd 'tháng' MM, yyyy HH:mm");
+            String formattedDate = outputFormat.format(date);
+
+           return formattedDate;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     public static String ConvertDateInSql(String dateStr) {
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());

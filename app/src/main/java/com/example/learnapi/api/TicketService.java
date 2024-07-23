@@ -18,8 +18,10 @@ public interface TicketService {
 
     @GET("tickets/movie/{idMovie}/room")
     Call<ResData> getRoomBySchedule(
-            @Path("idMovie") int idMovie, // @Path cần phải nằm trước @Query
+            @Path("idMovie") int idMovie,
             @Query("idTheater") int idTheater,
             @Query("showDate") String showDate
     );
+    @GET("tickets/customer/{idUser}")
+    Call<ResData> getBillofUser(@Path("idUser") int idUser);
 }

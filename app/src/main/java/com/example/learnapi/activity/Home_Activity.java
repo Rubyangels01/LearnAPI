@@ -24,11 +24,14 @@ import android.widget.Toast;
 
 import com.example.learnapi.R;
 import com.example.learnapi.activity.frugment.Frugment_Account;
+import com.example.learnapi.activity.frugment.Frugment_Active;
 import com.example.learnapi.activity.frugment.Frugment_Home;
 import com.example.learnapi.activity.frugment.Frugment_Login;
+import com.example.learnapi.activity.frugment.Frugment_Ordering;
 import com.example.learnapi.activity.frugment.Frugment_ShowTime;
 import com.example.learnapi.controller.base.baseactivity.baseActivity;
 import com.example.learnapi.controller.movie.HomePageController;
+import com.example.learnapi.module.Bill;
 import com.example.learnapi.module.Customer;
 import com.example.learnapi.module.Movie;
 import com.example.learnapi.module.PassWord;
@@ -126,7 +129,9 @@ public class Home_Activity extends baseActivity<HomePageController> implements N
             currentFragment = FRAGMENT_SHOWTIME;
         }else if(id == R.id.nav_active)
         {
-
+            replaceFragment(new Frugment_Active());
+            controller.GetBillofUser(HomePageController.IDUser);
+            currentFragment = FRAGMENT_ACTIVE;
         }else if(id == R.id.nav_account)
         {
             replaceFragment(new Frugment_Account());
@@ -160,15 +165,11 @@ public class Home_Activity extends baseActivity<HomePageController> implements N
     }
 
     public void navigateToHomePage(ArrayList<Movie> movies) {
-        // Create a new instance of your Fragment
         Fragment fragment = new Frugment_Home();
-
-        // Pass data to the Fragment through arguments (Bundle)
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("movieList", movies);
         fragment.setArguments(bundle);
 
-        // Replace the current Fragment with the new Fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame, fragment);
         transaction.addToBackStack(null); // Optional: Add to back stack for navigation history
@@ -189,6 +190,20 @@ public class Home_Activity extends baseActivity<HomePageController> implements N
         transaction.addToBackStack(null); // Optional: Add to back stack for navigation history
         transaction.commit();
     }
+    public void navigateToOrderingPage(ArrayList<Bill> bills) {
+        Fragment fragment = new Frugment_Active();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("billList", bills);
+        fragment.setArguments(bundle);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, fragment);
+        transaction.addToBackStack(null); // Optional: Add to back stack for navigation history
+        transaction.commit();
+    }
+
+
+
 
 
     public void getErr(String string)

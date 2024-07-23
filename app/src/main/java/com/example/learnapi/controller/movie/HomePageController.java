@@ -6,12 +6,14 @@ import android.content.DialogInterface;
 
 import com.example.learnapi.activity.Home_Activity;
 import com.example.learnapi.controller.base.basecontroller.baseController;
+import com.example.learnapi.module.Bill;
 import com.example.learnapi.module.Customer;
 import com.example.learnapi.module.Movie;
 import com.example.learnapi.module.PassWord;
 import com.example.learnapi.module.ResData;
 import com.example.learnapi.module.Theater;
 import com.example.learnapi.repository.MovieRepository;
+import com.example.learnapi.repository.TicketRepository;
 import com.example.learnapi.setupgeneral.dbHelper;
 import com.google.gson.Gson;
 
@@ -23,7 +25,7 @@ import retrofit2.Response;
 
 public class HomePageController extends baseController<Home_Activity, MovieRepository> {
 
-    MovieRepository movieRepository = new MovieRepository();
+
     public static int IDUser = 0;
     public HomePageController(Home_Activity activity)
     {
@@ -67,6 +69,7 @@ public class HomePageController extends baseController<Home_Activity, MovieRepos
         });
     }
 
+
     public void GetListTheater()
     {
 
@@ -96,6 +99,41 @@ public class HomePageController extends baseController<Home_Activity, MovieRepos
             @Override
             public void onFailure(Call<ResData> call, Throwable throwable) {
                 view.getErr(throwable.getMessage());
+            }
+        });
+    }
+    public void GetBillofUser(int idUser)
+    {
+
+        repository.GetBillofUser(idUser,new Callback<ResData>() {
+
+            @Override
+            public void onResponse(Call<ResData> call, Response<ResData> response) {
+
+                if(response.isSuccessful())
+                {
+
+                    ResData resData = response.body();
+                    if(resData.getCode() == 200)
+                    {
+                        ArrayList<Bill> billList = dbHelper.convertToObject(resData,Bill.class);
+
+                        view.navigateToOrderingPage(billList);
+                    }
+                    else
+                    {
+                        view.getErr(resData.getCode() + "");
+                    }
+                }
+                else
+                {
+                    view.getErr(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResData> call, Throwable throwable) {
+
             }
         });
     }

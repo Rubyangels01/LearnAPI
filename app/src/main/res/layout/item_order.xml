@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/gray_back"
+    >
+
+    <TextView
+        android:id="@+id/namemovie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="LẬT MẶT 7"
+        android:fontFamily="@font/aldrich"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingLeft="16dp"/>
+    <TextView
+        android:id="@+id/tvtheater"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:drawableLeft="@drawable/icon_location"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/aldrich"
+        android:text="CGV Lê Văn Việt"
+        android:textColor="@color/gray"
+        android:paddingLeft="16dp"/>
+    <TextView
+        android:id="@+id/tvtimedate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:drawableLeft="@drawable/icon_schedule"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/aldrich"
+        android:text="13 tháng 7,2024 - 19:25"
+        android:textColor="@color/gray"
+        android:paddingLeft="16dp"/>
+    <TextView
+        android:id="@+id/tvprice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingEnd="16dp"
+        android:textAlignment="textEnd"
+        android:fontFamily="@font/aldrich"
+        android:text="80000 VND"
+        android:textColor="@color/white" />
+    <View
+        android:layout_below="@id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        />
+
+
+
+</LinearLayout>

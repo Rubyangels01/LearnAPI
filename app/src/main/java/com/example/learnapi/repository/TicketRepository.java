@@ -30,4 +30,5 @@ public class TicketRepository implements Repository{
     {
         ticketService.getRoomBySchedule(idMovie,idTheater, showDate).enqueue(callback);
     }
+
 }

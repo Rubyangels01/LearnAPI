@@ -5,6 +5,7 @@ import static com.example.learnapi.setupgeneral.dbHelper.PORT;
 import com.example.learnapi.api.ApiService;
 import com.example.learnapi.api.MovieService;
 import com.example.learnapi.api.RetrofitClient;
+import com.example.learnapi.api.TicketService;
 import com.example.learnapi.api.UserService;
 import com.example.learnapi.module.Customer;
 import com.example.learnapi.module.PassWord;
@@ -17,12 +18,15 @@ public class MovieRepository implements Repository {
 
     MovieService movieService;
     UserService userService;
+    TicketService ticketService;
      String baseUrl = "http://"+ PORT + ":3002/";
      String baseUrl2 = "http://"+ PORT + ":3000/";
+     String baseUrl3 = "http://"+ PORT + ":3004/";
     public MovieRepository()
     {
         this.movieService = RetrofitClient.getClient(baseUrl).create(MovieService.class);
         this.userService = RetrofitClient.getClient(baseUrl2).create(UserService.class);
+        this.ticketService = RetrofitClient.getClient(baseUrl3).create(TicketService.class);
     }
     public void GetListMovie(Callback<ResData> callback)
     {
@@ -38,6 +42,10 @@ public class MovieRepository implements Repository {
     public void ChangePass(int idUser, PassWord passWord, Callback<ResData> callback)
     {
         userService.ChangePass(idUser,passWord).enqueue(callback);
+    }
+    public void GetBillofUser(int idUser, Callback<ResData> callback)
+    {
+        ticketService.getBillofUser(idUser).enqueue(callback);
     }
 
 
