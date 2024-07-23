@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_home"
+            android:title="@string/nav_home"
+            android:icon="@drawable/home_icon"/>
+        <item android:id="@+id/nav_showtime"
+            android:title="@string/nav_showtime"
+            android:icon="@drawable/icon_showtime"/>
+        <item android:id="@+id/nav_active"
+            android:title="@string/nav_active"
+            android:icon="@drawable/icon_history"/>
+        <item android:id="@+id/nav_account"
+            android:title="@string/nav_accout"
+            android:icon="@drawable/icon_account"/>
+        <item android:id="@+id/nav_login"
+            android:title="Log in"
+            android:icon="@drawable/icon_login"
+            android:visible="false"/>
+
+    </group>
+</menu>

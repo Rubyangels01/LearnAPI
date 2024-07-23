@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:background="@drawable/border"
+    android:layout_marginBottom="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/imagetheater"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:src="@drawable/pandoraimage"
+        android:background="@drawable/border"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="top">
+        <TextView
+            android:id="@+id/nametheater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CGV Pandora"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lầu 5, siêu thị Vincom Pandora, quận 10, TPHCM"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/icon_location"
+
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

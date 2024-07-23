@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:label=""
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".activity.test2"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DetailPayment"
+            android:exported="false" />
+        <activity
+            android:name=".activity.TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ui.account.EditAccount"
+            android:exported="false"
+            android:label="@string/title_activity_edit_account"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.ui.account.DetailAccount"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Login_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ChooseChair"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ScanBarCode_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BarCode_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ChooseTime_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Register_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.HomePageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DetailMovie_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.useractivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.Home_Activity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/account_information"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/logo"/>
+    <TextView
+        android:id="@+id/nameuser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ruby Nguyễn"
+        android:textAlignment="center"
+
+        android:textColor="@color/white"
+        android:padding="16dp"
+        android:textSize="18sp"
+        />
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:id="@+id/tvdetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detail"
+        android:textColor="@color/white"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:drawablePadding="5dp"
+        app:drawableLeftCompat="@drawable/icon_detail_account"
+        app:drawableRightCompat="@drawable/icon_vector_right" />
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_update"
+        android:textColor="@color/white"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:drawablePadding="5dp"
+        app:drawableLeftCompat="@drawable/icon_detail_account"
+        app:drawableRightCompat="@drawable/icon_vector_right" />
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:id="@+id/changepassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/change_password"
+        android:textColor="@color/white"
+        android:padding="16dp"
+        android:textSize="16sp"
+        android:drawablePadding="5dp"
+        app:drawableLeftCompat="@drawable/icon_detail_account"
+        app:drawableRightCompat="@drawable/icon_vector_right" />
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        android:layout_marginTop="10dp"
+        />
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="bottom"
+        android:backgroundTint="#21D533"
+        android:fontFamily="@font/aldrich"
+        android:text="@string/log_out" />
+
+
+
+
+
+</LinearLayout>

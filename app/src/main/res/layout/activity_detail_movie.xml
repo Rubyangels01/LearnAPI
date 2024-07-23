@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:id="@+id/img_movie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_movie"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_below="@id/img_movie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            >
+            <TextView
+                android:id="@+id/name_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/img_movie"
+                android:text="LẬT MẶT 7: MỘT ĐIỀU ƯỚC"
+
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:fontFamily="@font/aldrich"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Healing, Family"
+                android:fontFamily="@font/aldrich"
+                android:textColor="@color/gray"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Description"
+                android:fontFamily="@font/aldrich"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bộ phim 'Chữa lành' lấy cảm hứng
+từ những câu chuyện thường nhật trong đời sống gia đinh. Câu chuyện xoay quanh một người mẹ
+và những đứa con với tựa 'Một điều ước'"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/aldrich"
+                android:textSize="14sp"/>
+        </LinearLayout>
+        <View
+            android:layout_below="@id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginTop="10dp"
+            />
+        <LinearLayout
+            android:id="@+id/layout2"
+            android:layout_below="@id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Released Date"
+                    android:fontFamily="@font/aldrich"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/releaseddate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="26/4/2024"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/aldrich"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Languages"
+                    android:fontFamily="@font/aldrich"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/language"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phụ đề tiếng anh"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/aldrich"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:id="@+id/view2"
+            android:layout_below="@id/layout2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:layout_marginTop="10dp"
+            />
+        <LinearLayout
+            android:id="@+id/layout3"
+            android:layout_below="@id/layout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Cast "
+                android:fontFamily="@font/aldrich"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+
+
+            <TextView
+                android:id="@+id/cast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thái Vũ, Trương Minh Cường, Tín Nguyễn"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/aldrich"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_booking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout3"
+            android:layout_marginTop="130dp"
+            android:backgroundTint="#21D533"
+            android:fontFamily="@font/aldrich"
+            android:text="Booking" />
+
+
+
+
+
+
+
+
+        <!-- Các thành phần khác của màn hình -->
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
