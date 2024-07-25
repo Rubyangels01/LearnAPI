@@ -20,4 +20,6 @@ public interface UserService {
     Call<ResData> GetUserByID(@Path("idUser") int idUser);
     @PUT("api/users/user/{idUser}/password")
     Call<ResData> ChangePass(@Path("idUser") int idUser, @Body PassWord passWord);
+    @POST("api/users/register")
+    Call<ResData> Register(@Body Customer customer);
 }

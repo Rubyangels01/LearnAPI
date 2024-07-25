@@ -47,6 +47,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class TestActivity extends baseActivity<ChooTimeController> implements OnTextClickListener {
+    public  long timeLeftInMillis;
 
     ExpandableListAdapter listAdapter;
     DateAdapter listdateAdapter;
@@ -167,12 +168,15 @@ public  void showAlertDialog(String message) {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                timeLeftInMillis = 9000;
                 Intent intent = new Intent(TestActivity.this, ChooseChair.class);
                 intent.putExtra("nameTheater",selectedHeader);
                 intent.putExtra("dateShow",selectedDate);
                 intent.putExtra("hourShow",selectedHour);
                 intent.putExtra("movie", movie);
+                intent.putExtra("timeLeftInMillis", timeLeftInMillis);
                 startActivity(intent);
+
             }
         });
 

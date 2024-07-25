@@ -1,14 +1,19 @@
 package com.example.learnapi.activity.frugment;
 
+import static com.example.learnapi.adapter.DateAdapter.selectedDate;
+import static com.example.learnapi.adapter.ExpandableListAdapter.selectedHeader;
+import static com.example.learnapi.adapter.ExpandableListAdapter.selectedHour;
 import static com.example.learnapi.controller.movie.HomePageController.IDUser;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +24,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.learnapi.R;
+import com.example.learnapi.activity.ChooseChair;
 import com.example.learnapi.activity.Home_Activity;
+import com.example.learnapi.activity.TestActivity;
 import com.example.learnapi.activity.ui.account.DetailAccount;
 
 
@@ -38,6 +45,13 @@ public class Frugment_Account extends Fragment {
             @Override
             public void onClick(View v) {
                 showChangePasswordDialog();
+            }
+        });
+        Button btnlogout = view.findViewById(R.id.logout);
+        btnlogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertDialogYesNo("Do you sure you want to exit?");
             }
         });
 
@@ -92,5 +106,38 @@ public class Frugment_Account extends Fragment {
     private boolean isLoggedIn() {
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("UserSession", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean("isLoggedIn", false);
+    }
+    public void showAlertDialogYesNo(String message) {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getContext());
+        builder.setTitle("Thông báo");
+        builder.setMessage(message);
+
+        // Nút OK
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Home_Activity activity = (Home_Activity) getActivity();
+                if (activity != null) {
+                    Home_Activity.LOGINED = 0;
+                    activity.updateLoginMenuItem();
+                    activity.Checklogin();
+                    activity.IntentHome();
+                }
+
+            }
+        });
+
+        // Nút Cancel
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
+
+        // Tạo và hiển thị hộp thoại
+        android.app.AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

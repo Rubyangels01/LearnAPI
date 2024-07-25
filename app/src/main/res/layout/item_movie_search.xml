@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:background="@drawable/border"
+    android:layout_marginBottom="10dp"
+
+    >
+
+    <ImageView
+        android:id="@+id/img_movie"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:src="@drawable/img_movie"
+        android:background="@drawable/border"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="top">
+        <TextView
+            android:id="@+id/namemovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lật mặt 7: Một điều ước"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/typemovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tình cảm, tâm lí"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+
+
+            />
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="138 phút"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/icon_history"
+            android:textSize="16sp"
+            android:drawablePadding="10dp"/>
+        <TextView
+            android:id="@+id/releaseddate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25/7/2024"
+            android:textColor="@color/black"
+            android:drawableLeft="@drawable/icon_schedule"
+            android:textSize="16sp"
+            android:drawablePadding="10dp"/>
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -37,4 +37,9 @@ public class UserRepository implements Repository {
         userService.GetUserByID(idUser).enqueue(callback);
     }
 
+    public void Register(Customer customer,Callback<ResData> callback)
+    {
+        userService.Register(customer).enqueue(callback);
+    }
+
 }

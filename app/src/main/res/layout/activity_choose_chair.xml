@@ -9,30 +9,30 @@
     android:padding="16dp"
     tools:context=".activity.ChooseChair">
 
+
     <TextView
         android:id="@+id/nametheater"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:fontFamily="@font/aldrich"
         android:text="CGV LÊ VĂN VIỆT"
         android:textColor="@color/white"
         android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/inforticket"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/aldrich"
         android:text="Screen 2 - 18 tháng 05,2024 - 11:57"
         android:textColor="@color/gray"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/nametheater"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nametheater" />
 
     <ImageView
         android:id="@+id/screen_movie"
@@ -123,6 +123,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/total" />
+
+    <TextView
+        android:id="@+id/tvCountdownTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/aldrich"
+        android:text="14:30"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/inforticket"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -175,6 +175,9 @@ public class Home_Activity extends baseActivity<HomePageController> implements N
         transaction.addToBackStack(null); // Optional: Add to back stack for navigation history
         transaction.commit();
     }
+
+
+
     public void navigateToShowTimePage(ArrayList<Theater> theaters) {
         // Create a new instance of your Fragment
         Fragment fragment = new Frugment_ShowTime();

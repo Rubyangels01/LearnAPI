@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class dbHelper {
+
     public static String PORT = "192.168.1.8";
     public static <T> ArrayList<T> convertToObject(ResData resData, Class<T> clazz) {
         List<Object> dataList = (List<Object>) resData.getData(); // Assumed data is a list of objects
@@ -187,6 +188,20 @@ public class dbHelper {
         }
         return null;
     }
+    public static String capitalizeWords(String str) {
+        String[] words = str.split(" ");
+        StringBuilder capitalizedWords = new StringBuilder();
+        for (String word : words) {
+            if (word.length() > 0) {
+                capitalizedWords.append(Character.toUpperCase(word.charAt(0)))
+                        .append(word.substring(1).toLowerCase())
+                        .append(" ");
+            }
+        }
+        return capitalizedWords.toString().trim();
+    }
+
+
 
 
 

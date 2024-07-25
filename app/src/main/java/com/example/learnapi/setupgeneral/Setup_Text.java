@@ -28,14 +28,14 @@ public class Setup_Text {
             return true;
         }
     }
-    public boolean isValidPhoneNumber(String phoneNumber) {
+    public static boolean isValidPhoneNumber(String phoneNumber) {
         String cleanedPhoneNumber = phoneNumber.replaceAll("[^0-9]", "");
         if (!cleanedPhoneNumber.matches("\\d+")) {
             return false;
         }
         return cleanedPhoneNumber.length() == 10 || cleanedPhoneNumber.length() == 11;
     }
-    public boolean isNameValid(String name) {
+    public static boolean isNameValid(String name) {
         name = name.trim();
         if (name.matches(".*\\d.*")) {
             return false;
@@ -43,8 +43,8 @@ public class Setup_Text {
         return true;
     }
 
-    public boolean Check_Edit_Register(EditText edt_email,EditText edt_name, EditText edt_phone, EditText edt_pass, EditText confimpass,
-                                       TextView anno_email, TextView anno_name, TextView anno_phone, TextView anno_pass)
+    public static boolean Check_Edit_Register(EditText edt_email, EditText edt_name, EditText edt_phone, EditText edt_pass, EditText confimpass,
+                                              TextView anno_email, TextView anno_name, TextView anno_phone, TextView anno_pass)
     {
         String email = edt_email.getText().toString().trim();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.+[a-zA-Z]+";

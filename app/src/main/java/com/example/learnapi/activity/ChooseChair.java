@@ -11,27 +11,25 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.Display;
+import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.learnapi.R;
 import com.example.learnapi.controller.base.baseactivity.baseActivity;
 import com.example.learnapi.controller.ticket.ChoochairController;
 import com.example.learnapi.databinding.ActivityChooseChairBinding;
-import com.example.learnapi.databinding.ActivityDetailMovieBinding;
 import com.example.learnapi.module.Movie;
 import com.example.learnapi.setupgeneral.dbHelper;
 
 public class ChooseChair extends baseActivity<ChoochairController> {
     ActivityChooseChairBinding binding;
+    public long timeLeftInMillis;
 
     int numRows = 5; // Số hàng ghế bạn muốn hiển thị
     int numSeatsPerRow = 10; // Số ghế trên mỗi hàng
@@ -44,6 +42,12 @@ public class ChooseChair extends baseActivity<ChoochairController> {
     Movie movie;
     int Sum = 0;
 
+    private CountDownTimer countDownTimer;
+    // thời gian còn lại
+    private static final long START_TIME_IN_MILLIS = 900000; // 15 phút
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,11 @@ public class ChooseChair extends baseActivity<ChoochairController> {
 
         context = this;
         binding.total.setText(String.valueOf(Sum));
+
+        // Khởi tạo lại thời gian đếm ngược khi bắt đầu activity
+        timeLeftInMillis = START_TIME_IN_MILLIS;
+        startCountdownTimer(timeLeftInMillis);
+
         Intent intent = getIntent();
         if (intent != null) {
             nameTheater = intent.getStringExtra("nameTheater");
@@ -60,45 +69,30 @@ public class ChooseChair extends baseActivity<ChoochairController> {
             hourDate = intent.getStringExtra("hourShow");
             movie = intent.getParcelableExtra("movie");
             binding.nametheater.setText(nameTheater);
-
             binding.inforticket.setText(showDate + " - " + hourDate);
             GetRoom();
-//            try {
-//
-//            }catch (Exception e)
-//            {
-//                throw new RuntimeException("An error occurred while retrieving room information: " + e.getMessage(), e);
-//            }
         }
         SetEvent();
+    }
 
-
-
-
-
-
-}
-    public void SetEvent()
-    {
-
+    public void SetEvent() {
+        sharedPreferences = getSharedPreferences("CountDownPrefs", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         DisplayChair();
         GetID();
-        binding.btnpayment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent1 = new Intent(ChooseChair.this,DetailPayment.class);
-                intent1.putExtra("numberchair",coutchair);
-                intent1.putExtra("total",Sum);
-                startActivity(intent1);
-            }
+
+        binding.btnpayment.setOnClickListener(v -> {
+            Intent intent1 = new Intent(ChooseChair.this, DetailPayment.class);
+            intent1.putExtra("numberchair", coutchair);
+            intent1.putExtra("total", Sum);
+            intent1.putExtra("timeLeftInMillis", timeLeftInMillis);
+            startActivity(intent1);
         });
-
     }
-    public void DisplayChair()
-    {
-        for (int i = 0; i < numRows; i++) {
 
+    public void DisplayChair() {
+        for (int i = 0; i < numRows; i++) {
             LinearLayout rowLayout = new LinearLayout(this);
             rowLayout.setOrientation(LinearLayout.HORIZONTAL);
             LinearLayout.LayoutParams rowLayoutParams = new LinearLayout.LayoutParams(
@@ -122,40 +116,30 @@ public class ChooseChair extends baseActivity<ChoochairController> {
                 seatImageView.setLayoutParams(seatLayoutParams);
                 rowLayout.addView(seatImageView);
             }
-
             binding.seatLayoutContainer.addView(rowLayout);
         }
     }
 
-    public void GetRoom()
-    {
+    public void GetRoom() {
         String timeShow = dbHelper.ConvertStringToDate(showDate) + " " + hourDate;
-
-        controller.GetRoomBySchedule(getTheaterIdByName(nameTheater),timeShow,movie.getIdMovie());
+        controller.GetRoomBySchedule(getTheaterIdByName(nameTheater), timeShow, movie.getIdMovie());
     }
 
-
-    public int SetPrice()
-    {
+    public int SetPrice() {
         int price = 0;
-        if(dbHelper.isFridayOrSaturday(showDate))
-        {
-            price =Integer.parseInt(movie.getPrice()) + (Integer.parseInt(movie.getPrice()) * 15 /100 );
-
-        }
-        else
-        {
-            price =Integer.parseInt(movie.getPrice());
+        if (dbHelper.isFridayOrSaturday(showDate)) {
+            price = Integer.parseInt(movie.getPrice()) + (Integer.parseInt(movie.getPrice()) * 15 / 100);
+        } else {
+            price = Integer.parseInt(movie.getPrice());
         }
         return price;
     }
-    public void DisplayRoom(String nameRoom)
-    {
+
+    public void DisplayRoom(String nameRoom) {
         binding.namescreen.setText("Room " + nameRoom);
     }
 
     private void GetID() {
-
         for (int i = 0; i < binding.seatLayoutContainer.getChildCount(); i++) {
             View row = binding.seatLayoutContainer.getChildAt(i);
             if (row instanceof LinearLayout) {
@@ -164,37 +148,28 @@ public class ChooseChair extends baseActivity<ChoochairController> {
                     View child = rowLayout.getChildAt(j);
                     if (child instanceof ImageView) {
                         final ImageView seat = (ImageView) child;
-                        seat.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (!seat.isSelected()) {
-                                    seat.setColorFilter(ContextCompat.getColor(context, R.color.green), PorterDuff.Mode.SRC_IN);
-                                    seat.setSelected(true);
-                                    Sum = Sum + SetPrice();
-                                    coutchair = coutchair + 1;
-                                    binding.total.setText(String.valueOf(Sum));
-                                    binding.coutchair.setText(coutchair + " seat");
-                                } else {
-                                    seat.setColorFilter(null); // Xóa màu
-                                    seat.setSelected(false);
-                                    Sum = Sum - SetPrice();
-                                    coutchair = coutchair - 1;
-                                    binding.total.setText(String.valueOf(Sum));
-                                    binding.coutchair.setText(coutchair + " seat");
-                                }
-                                if(coutchair >= 1)
-                                {
-                                    binding.btnpayment.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.green));
-                                    binding.btnpayment.setEnabled(true);
-                                }
-                                else
-                                {
-                                    binding.btnpayment.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.gray));
-                                    binding.btnpayment.setEnabled(false);
-                                }
-                                int seatId = seat.getId();
-
-                                //Toast.makeText(context, "Seat ID: " + seatId, Toast.LENGTH_SHORT).show();
+                        seat.setOnClickListener(v -> {
+                            if (!seat.isSelected()) {
+                                seat.setColorFilter(ContextCompat.getColor(context, R.color.green), PorterDuff.Mode.SRC_IN);
+                                seat.setSelected(true);
+                                Sum = Sum + SetPrice();
+                                coutchair = coutchair + 1;
+                                binding.total.setText(String.valueOf(Sum));
+                                binding.coutchair.setText(coutchair + " seat");
+                            } else {
+                                seat.setColorFilter(null); // Xóa màu
+                                seat.setSelected(false);
+                                Sum = Sum - SetPrice();
+                                coutchair = coutchair - 1;
+                                binding.total.setText(String.valueOf(Sum));
+                                binding.coutchair.setText(coutchair + " seat");
+                            }
+                            if (coutchair >= 1) {
+                                binding.btnpayment.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.green));
+                                binding.btnpayment.setEnabled(true);
+                            } else {
+                                binding.btnpayment.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.gray));
+                                binding.btnpayment.setEnabled(false);
                             }
                         });
                     }
@@ -202,23 +177,55 @@ public class ChooseChair extends baseActivity<ChoochairController> {
             }
         }
     }
-    public  void showAlertDialog(String message) {
+
+    public void showAlertDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Thông báo");
         builder.setMessage(message);
 
         // Nút OK
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
+        builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
+    private void startCountdownTimer(long durationInMillis) {
+        countDownTimer = new CountDownTimer(durationInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeftInMillis = millisUntilFinished;
+                long minutes = millisUntilFinished / 60000;
+                long seconds = (millisUntilFinished % 60000) / 1000;
+                String timeLeft = String.format("%02d:%02d", minutes, seconds);
+                binding.tvCountdownTimer.setText(timeLeft);
+            }
 
+            @Override
+            public void onFinish() {
+                binding.tvCountdownTimer.setText("00:00");
+                showAlertDialog("Thời gian giữ chỗ đã hết, vui lòng thử lại.");
+                Intent intent = new Intent(ChooseChair.this, Home_Activity.class);
+                startActivity(intent);
+            }
+        }.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Không lấy lại thời gian từ SharedPreferences ở đây nữa
+        startCountdownTimer(timeLeftInMillis);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Chỉ lưu thời gian khi người dùng quay lại từ DetailActivity
+        if (isFinishing()) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putLong("timeLeftInMillis", timeLeftInMillis);
+            editor.apply();
+        }
+    }
 }

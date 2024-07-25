@@ -50,6 +50,9 @@ public class HomePageController extends baseController<Home_Activity, MovieRepos
                         ArrayList<Movie> movieList = dbHelper.convertToObject(resData,Movie.class);
 
                         view.navigateToHomePage(movieList);
+
+
+
                     }
                     else
                     {
@@ -118,6 +121,10 @@ public class HomePageController extends baseController<Home_Activity, MovieRepos
                     {
                         ArrayList<Bill> billList = dbHelper.convertToObject(resData,Bill.class);
 
+                        if(billList.isEmpty())
+                        {
+                            view.showAlertDialog("Bạn chưa có hoạt động nào!");
+                        }
                         view.navigateToOrderingPage(billList);
                     }
                     else
