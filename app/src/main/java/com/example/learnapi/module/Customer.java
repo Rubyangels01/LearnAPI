@@ -14,7 +14,7 @@
         @SerializedName("IDCustomer")
         private int idCustomer;
 
-        @SerializedName("UserName")
+        @SerializedName("FullName")
         private String userName;
 
         @SerializedName("Email")

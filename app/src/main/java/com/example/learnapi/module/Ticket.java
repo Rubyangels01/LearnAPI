@@ -17,6 +17,7 @@ public class Ticket implements Parcelable {
     @SerializedName("TIME")
     private int time;
 
+
     protected Ticket(Parcel in) {
         idMovie = in.readInt();
         image = in.readString();

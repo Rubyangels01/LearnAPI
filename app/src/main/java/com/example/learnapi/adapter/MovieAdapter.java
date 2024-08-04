@@ -8,13 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.learnapi.R;
 import com.example.learnapi.activity.ChooseTime_Activity;
 import com.example.learnapi.activity.DetailMovie_Activity;
+import com.example.learnapi.activity.TestActivity;
 import com.example.learnapi.activity.frugment.Frugment_Login;
 import com.example.learnapi.module.Movie;
 
@@ -81,26 +88,28 @@ public class MovieAdapter extends BaseAdapter {
         holder.btn_booking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(LOGINED == 0)
-                {
-                    Intent intent = new Intent(context, Frugment_Login.class);
-                    context.startActivity(intent);
-                }
-                else if(LOGINED == 1)
-                {
-                    Intent intent = new Intent(context, ChooseTime_Activity.class);
+                if (LOGINED == 0) {
+                    // Chuyển đến Fragment_Login trong Activity
+                    FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    Fragment fragment = new Frugment_Login();
+                    fragmentTransaction.replace(R.id.content_frame, fragment); // R.id.fragment_container là ID của container chứa Fragment
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                } else if (LOGINED == 1) {
+                    // Chuyển đến TestActivity
+                    Intent intent = new Intent(context, TestActivity.class);
                     intent.putExtra("movie", movie);
                     context.startActivity(intent);
                 }
-
-
             }
         });
+
         return convertView;
     }
 
     static class ViewHolder {
-        public View btn_booking;
+        public Button btn_booking;
         ImageView movieImage;
         TextView movieTitle;
     }

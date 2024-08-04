@@ -54,6 +54,13 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:2.7.7")
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation(fileTree(mapOf(
+        "dir" to "D:\\Downloads\\test",
+        "include" to listOf("*.aar", "*.jar")
+    )))
+    implementation("com.squareup.okhttp3:okhttp:4.6.0")
+    implementation("commons-codec:commons-codec:1.14")
+
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
 
 

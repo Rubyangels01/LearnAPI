@@ -27,7 +27,7 @@ public class DetailTicket_Activity extends AppCompatActivity {
             bill = intent.getParcelableExtra("bill");
             if (bill != null) {
                 Toast.makeText(this, bill.getNameTheater() + "", Toast.LENGTH_SHORT).show();
-//                displayMovieDetails(bill);
+                displayMovieDetails(bill);
             }
         }
     }
@@ -38,14 +38,7 @@ public class DetailTicket_Activity extends AppCompatActivity {
         binding.tvtheater.setText(bill.getNameTheater());
         binding.tvtimedate.setText(dbHelper.formatDate(bill.getShowdate()));
         binding.tvnameroom.setText(bill.getNameRoom());
-        if(bill.getPayment() == 1)
-        {
-            binding.tvpayment.setText("Ví VNPAY");
-        }
-        else
-        {
-            binding.tvpayment.setText("Ví MOMO");
-        }
+        binding.tvpayment.setText(bill.getPayment());
 
     }
 }

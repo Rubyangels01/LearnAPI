@@ -68,5 +68,6 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="update">Update</string>
+    <string name="title_activity_detail_bill">DetailBill_Activity</string>
 
 </resources>

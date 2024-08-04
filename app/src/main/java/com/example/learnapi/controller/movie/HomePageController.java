@@ -3,6 +3,7 @@ package com.example.learnapi.controller.movie;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.widget.Toast;
 
 import com.example.learnapi.activity.Home_Activity;
 import com.example.learnapi.controller.base.basecontroller.baseController;
@@ -12,6 +13,7 @@ import com.example.learnapi.module.Movie;
 import com.example.learnapi.module.PassWord;
 import com.example.learnapi.module.ResData;
 import com.example.learnapi.module.Theater;
+import com.example.learnapi.module.Usersession;
 import com.example.learnapi.repository.MovieRepository;
 import com.example.learnapi.repository.TicketRepository;
 import com.example.learnapi.setupgeneral.dbHelper;
@@ -154,7 +156,9 @@ public class HomePageController extends baseController<Home_Activity, MovieRepos
                     if (resData.getCode() == 201) {
                         Gson gson = new Gson();
                         Customer customer1 = gson.fromJson(gson.toJson(resData.getData()), Customer.class);
+
                         IDUser = customer1.getIdCustomer();
+                        Usersession.idUser = customer1.getIdCustomer();
                         view.saveAccount(customer1);
                         Home_Activity.LOGINED = 1;
                         view.updateLoginMenuItem();

@@ -178,8 +178,6 @@
                     android:backgroundTint="@color/green"
                     android:fontFamily="@font/aldrich"
                     android:text="Payment" />
-
-
             </LinearLayout>
         </LinearLayout>
 

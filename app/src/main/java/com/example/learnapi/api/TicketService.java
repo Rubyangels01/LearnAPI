@@ -1,11 +1,16 @@
 package com.example.learnapi.api;
 
+import com.example.learnapi.module.Bill;
 import com.example.learnapi.module.ResData;
+import com.example.learnapi.module.Ticket2;
 
 import java.util.Date;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -24,4 +29,16 @@ public interface TicketService {
     );
     @GET("tickets/customer/{idUser}")
     Call<ResData> getBillofUser(@Path("idUser") int idUser);
+
+    @PUT("tickets/chair/{idChair}/room/{idRoom}")
+    Call<ResData> UpdateChair(@Path("idChair") int idChair,@Path("idRoom") int idRoom,@Query("status") int status);
+    @GET("tickets/chairs/room/{idRoom}")
+    Call<ResData> getAllChair(@Path("idRoom") int idRoom);
+    @POST("tickets/ticket/customer/{IDCustomer}")
+    Call<ResData> SaveBillofUser(@Path("IDCustomer") int IDCustomer, @Body Bill bill);
+    @POST("tickets/ticket/save")
+    Call<ResData> SaveTicketofUser(@Body Ticket2 ticket2);
+
+    @GET("tickets/customer/{IDCustomer}/bill/{idBill}")
+    Call<ResData> GetTicketByBill(@Path("IDCustomer") int IDCustomer, @Path("idBill") int idBill);
 }

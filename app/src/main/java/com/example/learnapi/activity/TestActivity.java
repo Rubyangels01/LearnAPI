@@ -61,6 +61,7 @@ public class TestActivity extends baseActivity<ChooTimeController> implements On
     ImageView imgview;
     TextView tvname;
     TextView tvtime;
+    public static  int idMovie;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -74,6 +75,7 @@ public class TestActivity extends baseActivity<ChooTimeController> implements On
         if (intent != null) {
             movie = intent.getParcelableExtra("movie");
             if (movie != null) {
+                idMovie = movie.getIdMovie();
                 Glide.with(this)
                         .load(movie.getImage())
                         .into(imgview);

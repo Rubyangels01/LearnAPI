@@ -1,8 +1,6 @@
-<!-- res/values/themes.xml -->
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.LearnAPI" parent="Theme.Material3.DayNight.NoActionBar">
-
     </style>
 
     <style name="Theme.LearnAPI" parent="Base.Theme.LearnAPI" />
@@ -19,5 +17,12 @@
     <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="AppTheme" parent="Base.AppTheme">
+        <!-- Customize your AppTheme here -->
+        <item name="android:fontFamily">@font/aldrich</item>
+
+        <item name="colorOnPrimary">@color/white</item>
     </style>
 </resources>

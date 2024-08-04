@@ -1,4 +1,3 @@
-<!-- res/values/styles.xml -->
 <resources>
     <!-- Định nghĩa một style tái sử dụng cho các TextView -->
     <style name="textview_input_register">
@@ -17,12 +16,5 @@
         <item name="android:textSize">16sp</item>
         <item name="layout_constraintEnd_toEndOf">parent</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
-
-
-    </style>
-
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here -->
-        <item name="android:fontFamily">@font/aldrich</item>
     </style>
 </resources>

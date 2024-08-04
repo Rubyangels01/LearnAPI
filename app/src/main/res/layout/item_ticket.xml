@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource"
+    android:background="@color/white">
+    <TextView
+        android:id="@+id/idticket"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Mã vé TKHSSG01"
+        android:fontFamily="@font/aldrich"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingLeft="16dp"/>
+    <TextView
+        android:id="@+id/tvroom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/aldrich"
+        android:text="Phòng P02"
+        android:textColor="@color/black"
+        android:paddingLeft="20dp"/>
+    <TextView
+        android:id="@+id/tvchair"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:drawableLeft="@drawable/chair_icon"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/aldrich"
+        android:text="A01"
+        android:textColor="@color/black"
+        android:paddingLeft="16dp"/>
+    <TextView
+        android:id="@+id/tvprice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:drawableLeft="@drawable/icon_schedule"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/aldrich"
+        android:text="Giá vé 150000 đ"
+        android:textColor="@color/black"
+        android:paddingLeft="16dp"/>
+
+    <View
+        android:layout_below="@id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        />
+
+</LinearLayout>

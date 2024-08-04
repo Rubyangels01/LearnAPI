@@ -60,7 +60,12 @@ public class Register_Activity extends baseActivity<RegisterController> {
                         binding.txtcheckEmail, binding.txtcheckName, binding.txtcheckPhone, binding.txtcheckPass))
                 {
                     Customer customer = new Customer();
-                    // controller.RegisterController(customer);
+                    customer.setEmail(binding.edtemailRegiter.getText().toString());
+                    customer.setPassWord(binding.edtpassRegister.getText().toString());
+                    customer.setUserName(binding.edtnameRegister.getText().toString());
+                    customer.setPhone(binding.edtphoneRegister.getText().toString());
+
+                     controller.RegisterAccount(customer);
                 }
 
             }
