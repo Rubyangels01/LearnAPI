@@ -55,8 +55,8 @@ public class ChoochairController extends baseController<ChooseChair, TicketRepos
         });
     }
 
-    public void UpdateChair(int idChair, int idRoom, int status) {
-        repository.UpdateChair(idChair,idRoom,status, new Callback<ResData>() {
+    public void UpdateChair(int idChair, int idRoom, String showDate) {
+        repository.UpdateChair(idChair,idRoom,showDate, new Callback<ResData>() {
             @Override
             public void onResponse(Call<ResData> call, Response<ResData> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -77,15 +77,38 @@ public class ChoochairController extends baseController<ChooseChair, TicketRepos
             }
         });
     }
-    public void GetAllChairs(int idRoom) {
-        repository.GetAllChairs(idRoom, new Callback<ResData>() {
+
+    public void DeleteStatusChair(int idChair, int idRoom, String showDate) {
+        repository.DeleteChair(idChair,idRoom,showDate, new Callback<ResData>() {
+            @Override
+            public void onResponse(Call<ResData> call, Response<ResData> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ResData resData = response.body();
+                    if (resData.getCode() == 201) {
+                        view.showAlertDialog("Vé của bạn đã bị huỷ");
+                    }
+                } else {
+                    // Xử lý lỗi khi không thành công
+                    // (Thêm mã xử lý nếu cần)
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResData> call, Throwable throwable) {
+                // Xử lý lỗi khi gọi API thất bại
+                // (Thêm mã xử lý nếu cần)
+            }
+        });
+    }
+    public void GetAllChairs(int idRoom,String showDate) {
+        repository.GetAllChairs(idRoom,showDate, new Callback<ResData>() {
             @Override
             public void onResponse(Call<ResData> call, Response<ResData> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     ResData resData = response.body();
                     if (resData.getCode() == 200) {
                         ArrayList<Chairs> roomsList = dbHelper.convertToObject(resData,Chairs.class);
-                        view.showAlertDialog(roomsList.get(0).getNameChair());
+
                         view.DisplayChair(roomsList);
 
                     }

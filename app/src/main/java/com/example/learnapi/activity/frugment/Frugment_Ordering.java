@@ -16,7 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.learnapi.R;
+import com.example.learnapi.activity.DetailBill_Activity;
 import com.example.learnapi.activity.DetailTicket_Activity;
+import com.example.learnapi.activity.Home_Activity;
 import com.example.learnapi.adapter.OrderAdapter;
 import com.example.learnapi.module.Bill;
 
@@ -52,8 +54,8 @@ public class Frugment_Ordering extends Fragment {
                 Bill selectedBill = billList.get(position);
 
 
-                    Intent intent = new Intent(getContext(), DetailTicket_Activity.class);
-                    intent.putExtra("bill", selectedBill);
+                    Intent intent = new Intent(getContext(), DetailBill_Activity.class);
+                    intent.putExtra("bill", selectedBill.getIdBill());
                     startActivity(intent);
 
             }

@@ -34,13 +34,17 @@ public class TicketRepository implements Repository{
         ticketService.getRoomBySchedule(idMovie,idTheater, showDate).enqueue(callback);
     }
 
-    public void UpdateChair(int idChair, int idRoom, int status, Callback<ResData> callback)
+    public void UpdateChair(int idChair, int idRoom, String showDate, Callback<ResData> callback)
     {
-        ticketService.UpdateChair(idChair,idRoom, status).enqueue(callback);
+        ticketService.UpdateChair(idChair,idRoom, showDate).enqueue(callback);
     }
-    public void GetAllChairs(int idRoom,Callback<ResData> callback)
+    public void DeleteChair(int idChair, int idRoom, String showDate, Callback<ResData> callback)
     {
-        ticketService.getAllChair(idRoom).enqueue(callback);
+        ticketService.DeleteStatusChair(idChair,idRoom, showDate).enqueue(callback);
+    }
+    public void GetAllChairs(int idRoom,String showDate,Callback<ResData> callback)
+    {
+        ticketService.getAllChair(idRoom,showDate).enqueue(callback);
     }
     public void SaveBill(int idUser,Bill bill, Callback<ResData> callback)
     {

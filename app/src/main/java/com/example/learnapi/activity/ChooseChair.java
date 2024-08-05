@@ -2,6 +2,7 @@ package com.example.learnapi.activity;
 
 import static com.example.learnapi.activity.DetailMovie_Activity.GetMovie;
 import static com.example.learnapi.adapter.ExpandableListAdapter.getTheaterIdByName;
+import static com.example.learnapi.adapter.ExpandableListAdapter.selectedHour;
 import static com.example.learnapi.setupgeneral.Setup_Text.RandomSeatId;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -98,7 +99,7 @@ public class ChooseChair extends baseActivity<ChoochairController> {
             intent1.putExtra("movie", movie);
             for(int i : listIDChair)
             {
-                controller.UpdateChair(i,idRoom,1);
+                controller.UpdateChair(i,idRoom,dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
             }
 
             startActivity(intent1);
@@ -139,7 +140,7 @@ public class ChooseChair extends baseActivity<ChoochairController> {
 
                 seatLayoutParams.setMargins(4, 0, 4, 0); // Điều chỉnh khoảng cách giữa các ghế
                 seatImageView.setLayoutParams(seatLayoutParams);
-                if(chair.getStatus() == true)
+                if(chair.getStatus() == 1)
                 {
                     seatImageView.setEnabled(false);
                     seatImageView.setColorFilter(ContextCompat.getColor(context, R.color.red), PorterDuff.Mode.SRC_IN);
@@ -153,7 +154,7 @@ public class ChooseChair extends baseActivity<ChoochairController> {
 
                         nameSeat = chairName;
                         idSeat = chairId;
-
+                        Toast.makeText(context, chairName + "", Toast.LENGTH_SHORT).show();
 
                         listIDChair.add(idSeat);
 
@@ -165,7 +166,7 @@ public class ChooseChair extends baseActivity<ChoochairController> {
                         seatImageView.setColorFilter(null); // Xóa màu
                         seatImageView.setSelected(false);
                         Sum = Sum - SetPrice();
-                        controller.UpdateChair(idSeat,idRoom,0);
+
                         listIDChair.remove((Integer) chairId);
                         coutchair = coutchair - 1;
                         binding.total.setText(String.valueOf(Sum));
@@ -207,8 +208,7 @@ public void setChair(int idseat, int idRoom, int status)
 
     public void DisplayRoom(Rooms rooms) {
         binding.namescreen.setText("Room " + rooms.getNameRoom());
-
-        controller.GetAllChairs(rooms.getIdRoom());
+        controller.GetAllChairs(rooms.getIdRoom(),dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
     }
 
     public static Rooms getRoom(Rooms rooms) {
@@ -268,7 +268,7 @@ public void setChair(int idseat, int idRoom, int status)
         super.onBackPressed();
         for(int i : listIDChair)
         {
-            controller.UpdateChair(i,idRoom,0);
+            controller.DeleteStatusChair(i,idRoom,dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
         }
     }
 }

@@ -8,6 +8,7 @@ import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -30,10 +31,12 @@ public interface TicketService {
     @GET("tickets/customer/{idUser}")
     Call<ResData> getBillofUser(@Path("idUser") int idUser);
 
-    @PUT("tickets/chair/{idChair}/room/{idRoom}")
-    Call<ResData> UpdateChair(@Path("idChair") int idChair,@Path("idRoom") int idRoom,@Query("status") int status);
+    @POST("tickets/chair/{idChair}/room/{idRoom}")
+    Call<ResData> UpdateChair(@Path("idChair") int idChair,@Path("idRoom") int idRoom,@Query("showDate") String showDate);
+    @DELETE("tickets/chair/{idChair}/room/{idRoom}")
+    Call<ResData> DeleteStatusChair(@Path("idChair") int idChair,@Path("idRoom") int idRoom,@Query("showDate") String showDate);
     @GET("tickets/chairs/room/{idRoom}")
-    Call<ResData> getAllChair(@Path("idRoom") int idRoom);
+    Call<ResData> getAllChair(@Path("idRoom") int idRoom,@Query("showDate") String showDate);
     @POST("tickets/ticket/customer/{IDCustomer}")
     Call<ResData> SaveBillofUser(@Path("IDCustomer") int IDCustomer, @Body Bill bill);
     @POST("tickets/ticket/save")

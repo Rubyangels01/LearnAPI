@@ -17,21 +17,21 @@ public class Chairs implements Parcelable {
     @SerializedName("NameChair")
     private String nameChair;
     @SerializedName("Status")
-    private boolean status;
+    private int status;
 
 
     protected Chairs(Parcel in) {
         idChair = in.readInt();
         nameChair = in.readString();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            status  = in.readBoolean();
+            status  = in.readInt();
         }
     }
 
     public Chairs() {
     }
 
-    public boolean getStatus() {
+    public int getStatus() {
         return status;
     }
 
@@ -72,8 +72,6 @@ public class Chairs implements Parcelable {
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(idChair);
         dest.writeString(nameChair);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            dest.writeBoolean(status);
-        }
+        dest.writeInt(status);
     }
 }

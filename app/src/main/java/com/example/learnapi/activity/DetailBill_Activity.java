@@ -41,13 +41,16 @@ public class DetailBill_Activity extends baseActivity<DetailBillController> {
                binding.tvAmount.setText(bill.getTotal());
                 controller.GetTicketByBill(HomePageController.IDUser,bill.getIdBill());
             }
+
         }
+
+
         binding.backHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(DetailBill_Activity.this, "Trở về home", Toast.LENGTH_SHORT).show();
-                Intent intenhome = new Intent(DetailBill_Activity.this, Home_Activity.class);
-                startActivity(intenhome);
+                Intent intenhomet = new Intent(DetailBill_Activity.this, Home_Activity.class);
+                startActivity(intenhomet);
 
             }
         });
@@ -65,7 +68,7 @@ public class DetailBill_Activity extends baseActivity<DetailBillController> {
     public void DisplayBill(List<Bill> listbill)
     {
 
-        OrderAdapter adapter = new OrderAdapter(this,listbill);
+        TicketAdapter adapter = new TicketAdapter(this,listbill);
         binding.lvordered.setAdapter(adapter);
     }
 
