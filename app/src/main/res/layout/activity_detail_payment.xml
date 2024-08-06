@@ -149,9 +149,9 @@
                         android:id="@+id/radioButton1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Ví VNPAY"
+                        android:text="Ví ZALOPAY"
                         android:buttonTint="@color/white"
-                        android:drawableLeft="@drawable/iconvnpay"
+                        android:drawableLeft="@drawable/icon_zalopay"
                         android:checked="true"
                         android:drawablePadding="10dp"
                         android:textColor="@color/white"/>
@@ -160,8 +160,8 @@
                         android:id="@+id/radioButton2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Ví Momo"
-                        android:drawableLeft="@drawable/iconmomo"
+                        android:text="Ví VNPAY"
+                        android:drawableLeft="@drawable/iconvnpay"
                         android:buttonTint="@color/white"
                         android:drawablePadding="10dp"
                         android:textColor="@color/white"/>

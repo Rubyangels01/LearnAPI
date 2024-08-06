@@ -1,5 +1,6 @@
 package com.example.learnapi.activity;
 
+import static com.example.learnapi.activity.DetailMovie_Activity.typeMovie;
 import static com.example.learnapi.adapter.DateAdapter.selectedDate;
 import static com.example.learnapi.adapter.ExpandableListAdapter.selectedHeader;
 import static com.example.learnapi.adapter.ExpandableListAdapter.selectedHour;
@@ -61,6 +62,7 @@ public class TestActivity extends baseActivity<ChooTimeController> implements On
     ImageView imgview;
     TextView tvname;
     TextView tvtime;
+    TextView tvtypeMovie;
     public static  int idMovie;
 
     @SuppressLint("MissingInflatedId")
@@ -71,6 +73,7 @@ public class TestActivity extends baseActivity<ChooTimeController> implements On
         imgview = findViewById(R.id.imgmovie);
         tvname = findViewById(R.id.namemovie);
         tvtime = findViewById(R.id.tvtime);
+        tvtypeMovie = findViewById(R.id.typemovie);
         Intent intent = getIntent();
         if (intent != null) {
             movie = intent.getParcelableExtra("movie");
@@ -81,6 +84,7 @@ public class TestActivity extends baseActivity<ChooTimeController> implements On
                         .into(imgview);
                 tvname.setText(movie.getNameMovie());
                 tvtime.setText(String.valueOf(movie.getTime()));
+                tvtypeMovie.setText(typeMovie);
             }
         }
         btn_booking = findViewById(R.id.btnbooking);

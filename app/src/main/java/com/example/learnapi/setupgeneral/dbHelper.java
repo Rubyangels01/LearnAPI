@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 
 import com.example.learnapi.module.Customer;
 import com.example.learnapi.module.ResData;
+import com.example.learnapi.module.TypeMovie;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -14,6 +15,7 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -25,6 +27,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.StringJoiner;
 
 public class dbHelper {
 
@@ -203,8 +206,26 @@ public class dbHelper {
 
 
 
+    public static String ConvertPrice(String str) {
+        int number = Integer.parseInt(str);
+
+        // Định dạng số với dấu phẩy
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        String formattedNumber = numberFormat.format(number);
+
+        return formattedNumber;
+
+    }
 
 
+    public static String ConvertTypeMovie(List<TypeMovie> typeMovieList) {
+        StringJoiner joiner = new StringJoiner(", ");
+        for (TypeMovie genre : typeMovieList) {
+            joiner.add(genre.getNameType());
+        }
+        String result = joiner.toString();
+        return result;
+    }
 
 
 

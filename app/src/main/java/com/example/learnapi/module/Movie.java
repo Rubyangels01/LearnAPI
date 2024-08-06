@@ -30,6 +30,8 @@ public class Movie implements Parcelable {
     private String price;
     @SerializedName("Status")
     private int status;
+    @SerializedName("NumberTicket")
+    private int numberTicket;
 
     public Movie(int idMovie, String nameMovie, int time, String description, Date releasedDate, String language, String cast) {
         this.idMovie = idMovie;

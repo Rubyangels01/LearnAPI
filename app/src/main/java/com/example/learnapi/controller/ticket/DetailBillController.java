@@ -35,6 +35,7 @@ public class DetailBillController extends baseController<DetailBill_Activity, Ti
                         ArrayList<Bill> billList = dbHelper.convertToObject(resData,Bill.class);
 
                         view.DislayInfor(billList.get(0));
+                        view.GetBillList(billList);
                         view.DisplayBill(billList);
                     }
                 } else {

@@ -86,7 +86,7 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
         binding.namemovie.setText(movie1.getNameMovie());
         binding.tvtheater.setText(selectedHeader);
         binding.tvtimedate.setText(dbHelper.convertDateToDetaildate(selectedDate) + " - " + selectedHour);
-        binding.tvtotal.setText(String.valueOf(total));
+        binding.tvtotal.setText(dbHelper.ConvertPrice(String.valueOf(total)));
         StrictMode.ThreadPolicy policy = new
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

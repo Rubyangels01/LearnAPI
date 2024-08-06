@@ -55,7 +55,8 @@ public class Frugment_Ordering extends Fragment {
 
 
                     Intent intent = new Intent(getContext(), DetailBill_Activity.class);
-                    intent.putExtra("bill", selectedBill.getIdBill());
+
+                    intent.putExtra("bill1", selectedBill);
                     startActivity(intent);
 
             }

@@ -73,7 +73,7 @@ public class MovieAdapter extends BaseAdapter {
                 .into(holder.movieImage);
 
         holder.movieTitle.setText(movie.getNameMovie());
-
+        
         // Xử lý sự kiện khi click vào hình ảnh
         holder.movieImage.setOnClickListener(new View.OnClickListener() {
             @Override

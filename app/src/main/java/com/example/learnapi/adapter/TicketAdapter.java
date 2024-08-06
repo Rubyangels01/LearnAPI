@@ -60,20 +60,21 @@ public class TicketAdapter extends BaseAdapter {
             holder.idTicket.setText("TKHHSSM" + bill.getIdTicket());
             holder.nameroom.setText(bill.getNameRoom());
             holder.numberChair.setText(bill.getNamechair());
-            holder.price.setText(SetPrice(bill));
+            holder.price.setText(dbHelper.ConvertPrice(bill.getPrice()));
         }
 
 
         return convertView;
     }
-    public int SetPrice(Bill bill) {
+    public String SetPrice(Bill bill) {
         int price = 0;
         if (dbHelper.isFridayOrSaturday(bill.getShowdate())) {
             price = Integer.parseInt(bill.getPrice()) + (Integer.parseInt(bill.getPrice()) * 15 / 100);
         } else {
             price = Integer.parseInt(bill.getPrice());
         }
-        return price;
+        return dbHelper.ConvertPrice(String.valueOf(price));
+
     }
 
     // ViewHolder class

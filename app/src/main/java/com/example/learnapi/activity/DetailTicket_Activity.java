@@ -15,7 +15,7 @@ import com.example.learnapi.setupgeneral.dbHelper;
 
 public class DetailTicket_Activity extends AppCompatActivity {
     ActivityDetailTicketBinding binding;
-    Bill bill;
+    Bill bill = new Bill();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class DetailTicket_Activity extends AppCompatActivity {
         if (intent != null) {
             bill = intent.getParcelableExtra("bill");
             if (bill != null) {
-                Toast.makeText(this, bill.getNameTheater() + "", Toast.LENGTH_SHORT).show();
+
                 displayMovieDetails(bill);
             }
         }
@@ -35,10 +35,11 @@ public class DetailTicket_Activity extends AppCompatActivity {
     private void displayMovieDetails(Bill bill) {
 
         binding.namemovie.setText(bill.getNameMovie());
-        binding.tvtheater.setText(bill.getNameTheater());
-        binding.tvtimedate.setText(dbHelper.formatDate(bill.getShowdate()));
+       binding.tvtimedate.setText(dbHelper.formatDate(bill.getNameTheater()));
         binding.tvnameroom.setText(bill.getNameRoom());
-        binding.tvpayment.setText(bill.getPayment());
+        binding.tvpayment.setText(dbHelper.ConvertPrice(bill.getPrice()));
+        binding.tvnumberchair.setText(bill.getNamechair());
+
 
     }
 }
