@@ -241,13 +241,13 @@ public void setChair(int idseat, int idRoom, int status)
             public void onFinish() {
                 binding.tvCountdownTimer.setText("00:00");
                 showAlertDialog("Thời gian giữ chỗ đã hết, vui lòng thử lại.");
-                if(!listIDChair.isEmpty())
-                {
-                    for(int i : listIDChair)
-                    {
-                        controller.DeleteStatusChair(i,idRoom,dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
-                    }
-                }
+//                if(!listIDChair.isEmpty())
+//                {
+//                    for(int i : listIDChair)
+//                    {
+//                        controller.DeleteStatusChair(i,idRoom,dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
+//                    }
+//                }
                 Intent intent = new Intent(ChooseChair.this, Home_Activity.class);
                 startActivity(intent);
             }

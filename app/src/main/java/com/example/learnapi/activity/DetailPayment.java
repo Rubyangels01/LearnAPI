@@ -97,16 +97,7 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
         );
         startTimer();
 
-//        binding.test.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Bill bill = new Bill();
-//                bill.setPayment("Ví ZALOPay");
-//                bill.setTotal(String.valueOf(total));
-//                controller.SaveBillOfUser(HomePageController.IDUser,bill);
-//            }
-//        });
+
     }
 
     private void startTimer() {
@@ -158,7 +149,7 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
             public void onClick(DialogInterface dialog, int which) {
                 CreateOrder orderApi = new CreateOrder();
                 try {
-                    JSONObject data = orderApi.createOrder(binding.tvtotal.getText().toString());
+                    JSONObject data = orderApi.createOrder(String.valueOf(total));
                     String code = data.getString("return_code");
 
 
@@ -180,7 +171,7 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
                                 bill.setPayment("Ví ZALOPay");
                                 bill.setTotal(String.valueOf(total));
                                 bill1 = bill;
-                                Toast.makeText(context, bill.getPayment() + " " + Usersession.idUser, Toast.LENGTH_SHORT).show();
+
                                controller.SaveBillOfUser(HomePageController.IDUser,bill);
                                // showAlertDialog("Vé bị huỷ do thanh toán không thành công");
 
@@ -250,7 +241,7 @@ public Bills getBill(Bills bill)
 
         Intent intent = new Intent(DetailPayment.this, DetailBill_Activity.class);
         intent.putExtra("bill",bill2);
-        showAlertDialog("Đặt vé thành công");
+        
         startActivity(intent);
 
     }

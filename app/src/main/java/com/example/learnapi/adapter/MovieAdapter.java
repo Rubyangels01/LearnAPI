@@ -31,6 +31,7 @@ public class MovieAdapter extends BaseAdapter {
     private Context context;
     private List<Movie> movieList;
 
+
     public MovieAdapter(Context context, List<Movie> movieList) {
         this.context = context;
         this.movieList = movieList;
@@ -73,7 +74,7 @@ public class MovieAdapter extends BaseAdapter {
                 .into(holder.movieImage);
 
         holder.movieTitle.setText(movie.getNameMovie());
-        
+
         // Xử lý sự kiện khi click vào hình ảnh
         holder.movieImage.setOnClickListener(new View.OnClickListener() {
             @Override

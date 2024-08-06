@@ -51,6 +51,10 @@ public class MovieRepository implements Repository {
     {
         movieService.getTypeMovie(idMovie).enqueue(callback);
     }
+    public void GetNumberTicketMovie(int idMovie, Callback<ResData> callback)
+    {
+        movieService.getNumberTicket(idMovie).enqueue(callback);
+    }
 
 
 }

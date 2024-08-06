@@ -17,4 +17,6 @@ public interface MovieService {
     @GET("movies/type/movie/{id}")
     Call<ResData> getTypeMovie(@Path("id") int idMovie);
 
+    @GET("movies/ticket/movie/{idMovie}")
+    Call<ResData> getNumberTicket(@Path("idMovie") int idMovie);
 }

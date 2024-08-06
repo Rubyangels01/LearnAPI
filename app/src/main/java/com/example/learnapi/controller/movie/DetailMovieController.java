@@ -58,4 +58,39 @@ public class DetailMovieController extends baseController<DetailMovie_Activity, 
             }
         });
     }
+
+    public void GetNumberTicket(int idMovie)
+    {
+
+        repository.GetNumberTicketMovie(idMovie,new Callback<ResData>() {
+            @Override
+            public void onResponse(Call<ResData> call, Response<ResData> response) {
+
+                if(response.isSuccessful())
+                {
+
+                    ResData resData = response.body();
+                    if(resData.getCode() == 200)
+                    {
+                        ArrayList<Movie> typemovieList = dbHelper.convertToObject(resData,Movie.class);
+                        view.DisplayNumberTicket(typemovieList);
+                    }
+                    else
+                    {
+                        view.showAlertDialog("Lỗi hệ thống!");
+                    }
+                }
+                else
+                {
+                    view.showAlertDialog(response.message());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResData> call, Throwable throwable) {
+
+            }
+        });
+    }
 }

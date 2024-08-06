@@ -15,6 +15,7 @@ import com.example.learnapi.controller.base.baseactivity.baseActivity;
 import com.example.learnapi.controller.movie.DetailMovieController;
 import com.example.learnapi.controller.movie.HomePageController;
 
+
 import com.example.learnapi.databinding.ActivityDetailMovieBinding;
 import com.example.learnapi.module.Movie;
 import com.example.learnapi.module.TypeMovie;
@@ -39,6 +40,7 @@ public class DetailMovie_Activity extends baseActivity<DetailMovieController> {
             if (movie != null) {
                 displayMovieDetails(movie);
                 controller.GetTypeMovie(movie.getIdMovie());
+                controller.GetNumberTicket(movie.getIdMovie());
             }
         }
 
@@ -82,7 +84,13 @@ public class DetailMovie_Activity extends baseActivity<DetailMovieController> {
     public void DisplayMovieType(List<TypeMovie> list)
     {
         typeMovie = dbHelper.ConvertTypeMovie(list);
-        binding.typemovie.setText(dbHelper.ConvertTypeMovie(list));
+        binding.typemovie.setText(typeMovie);
+    }
+
+    public void DisplayNumberTicket(List<Movie> list)
+    {
+
+        binding.numberticket.setText("Số vé đã bán: " + list.get(0).getNumberTicket());
     }
     public  void showAlertDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

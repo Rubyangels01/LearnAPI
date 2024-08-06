@@ -45,6 +45,10 @@ public class Movie implements Parcelable {
     public Movie() {
     }
 
+    public int getNumberTicket() {
+        return numberTicket;
+    }
+
     public String getPrice() {
         return price;
     }
@@ -141,6 +145,7 @@ public class Movie implements Parcelable {
         image = in.readString();
         price = in.readString();
         status = in.readInt();
+        numberTicket = in.readInt();
     }
 
     @Override
@@ -155,6 +160,7 @@ public class Movie implements Parcelable {
         dest.writeString(image);
         dest.writeString(price);
         dest.writeInt(status);
+        dest.writeInt(numberTicket);
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {

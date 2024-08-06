@@ -58,7 +58,7 @@ public class OrderAdapter extends BaseAdapter {
         holder.nameMovie.setText(bill.getNameMovie());
         holder.tvtheater.setText(bill.getNameTheater());
         holder.tvtimeshow.setText(dbHelper.formatDate(bill.getShowdate()));
-        holder.tvprice.setText(bill.getTotal() + " VND");
+        holder.tvprice.setText(dbHelper.ConvertPrice(bill.getTotal())  + " VND");
 
         return convertView;
     }

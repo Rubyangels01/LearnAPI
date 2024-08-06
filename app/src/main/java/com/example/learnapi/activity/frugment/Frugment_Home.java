@@ -31,6 +31,7 @@ import java.util.ArrayList;
 public class Frugment_Home extends Fragment {
     ListView listView;
     ArrayList<Movie> movieList;
+    int numberTicket;
     private ProgressBar progressBar;
 
     @Nullable
