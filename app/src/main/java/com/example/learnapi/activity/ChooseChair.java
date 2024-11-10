@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,17 +17,23 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.learnapi.R;
+import com.example.learnapi.adapter.VoucherAdapter;
 import com.example.learnapi.controller.base.baseactivity.baseActivity;
 import com.example.learnapi.controller.ticket.ChoochairController;
 import com.example.learnapi.databinding.ActivityChooseChairBinding;
 import com.example.learnapi.module.Chairs;
 import com.example.learnapi.module.Movie;
 import com.example.learnapi.module.Rooms;
+import com.example.learnapi.module.Voucher;
 import com.example.learnapi.setupgeneral.dbHelper;
 
 import java.util.ArrayList;
@@ -104,6 +111,7 @@ public class ChooseChair extends baseActivity<ChoochairController> {
 
             startActivity(intent1);
         });
+        ChooseVoucher();
     }
 
     public void DisplayChair(ArrayList<Chairs> listchair) {
@@ -252,6 +260,43 @@ public void setChair(int idseat, int idRoom, int status)
                 startActivity(intent);
             }
         }.start();
+    }
+    public void ChooseVoucher()
+    {
+        binding.chooseVoucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog voucherDialog = new Dialog(ChooseChair.this);
+                voucherDialog.setContentView(R.layout.dialog_voucher);
+                voucherDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                // Tìm ListView trong dialog
+                ListView voucherListView = voucherDialog.findViewById(R.id.voucherListView);
+
+                // Dữ liệu voucher mẫu (thay thế với dữ liệu thực tế)
+                ArrayList<Voucher> vouchers = new ArrayList<>();
+                Voucher voucher1 = new Voucher();
+                voucher1.setNamePromotion("GIẢM 10%");
+                vouchers.add(voucher1);
+
+                // Thiết lập adapter cho ListView
+                VoucherAdapter adapter = new VoucherAdapter(ChooseChair.this,vouchers);
+                voucherListView.setAdapter(adapter);
+
+                // Xử lý sự kiện khi chọn voucher
+                voucherListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Voucher selectedVoucher = vouchers.get(position);
+                        binding.chooseVoucher.setText("Đã chọn: " + selectedVoucher.getNamePromotion());
+                        voucherDialog.dismiss();
+                    }
+                });
+
+                // Hiển thị dialog
+                voucherDialog.show();
+            }
+        });
     }
 
     @Override

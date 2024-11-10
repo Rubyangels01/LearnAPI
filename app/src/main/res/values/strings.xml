@@ -69,5 +69,6 @@
     </string>
     <string name="update">Update</string>
     <string name="title_activity_detail_bill">DetailBill_Activity</string>
+    <string name="title_activity_cancel_ticket">CancelTicket_Activity</string>
 
 </resources>

@@ -31,7 +31,7 @@ import java.util.StringJoiner;
 
 public class dbHelper {
 
-    public static String PORT = "192.168.1.8";
+    public static String PORT = "192.168.1.186";
     public static <T> ArrayList<T> convertToObject(ResData resData, Class<T> clazz) {
         List<Object> dataList = (List<Object>) resData.getData(); // Assumed data is a list of objects
         ArrayList<T> listT = new ArrayList<>();

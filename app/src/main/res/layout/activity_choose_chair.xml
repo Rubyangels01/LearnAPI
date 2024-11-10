@@ -77,24 +77,23 @@
         android:id="@+id/text3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:fontFamily="@font/aldrich"
         android:gravity="right"
         android:text="Subtotal (Including surcharges)"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seatLayoutContainer" />
+        app:layout_constraintTop_toBottomOf="@+id/choose_voucher" />
 
     <TextView
         android:id="@+id/coutchair"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/aldrich"
         android:text="0 Seat"
         android:textColor="@color/white"
-        android:fontFamily="@font/aldrich"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,8 +104,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="90000"
         android:fontFamily="@font/aldrich"
+        android:text="90000"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -117,10 +116,12 @@
         android:id="@+id/btnpayment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:backgroundTint="#737575"
-        android:text="Payment"
         android:fontFamily="@font/aldrich"
+        android:text="Payment"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/total" />
 
@@ -137,6 +138,60 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/inforticket"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/choose_voucher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/aldrich"
+        android:gravity="right"
+        android:text="Voucher"
+        android:textColor="@color/white"
+        android:drawableRight="@drawable/icon_vector_right"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seatLayoutContainer" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/aldrich"
+        android:text="140000"
+        android:textColor="@color/white"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/total" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/aldrich"
+        android:text="Giảm 15%"
+        android:textColor="@color/white"
+
+        app:layout_constraintEnd_toStartOf="@+id/choose_voucher"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="428dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/aldrich"
+        android:text="Total"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coutchair" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

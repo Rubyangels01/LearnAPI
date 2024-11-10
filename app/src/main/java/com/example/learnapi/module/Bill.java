@@ -34,7 +34,11 @@ public class Bill implements Parcelable {
     private String price;
     @SerializedName("Time")
     private int time;
+    @SerializedName("CancelDate")
+    private String cancelDate;
 
+    @SerializedName("Status") //(1 laf đã đặt success, 0 là cancel)
+    private int status;
     public Bill() {
 
     }
@@ -129,6 +133,14 @@ public class Bill implements Parcelable {
         this.nameRoom = nameRoom;
     }
 
+    public String getCancelDate() {
+        return cancelDate;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     protected Bill(Parcel in) {
         idBill = in.readInt();
         nameMovie = in.readString();
@@ -142,6 +154,8 @@ public class Bill implements Parcelable {
         price = in.readString();
         time = in.readInt();
         idTicket = in.readInt();
+        cancelDate = in.readString();
+        status = in.readInt();
     }
 
     public static final Creator<Bill> CREATOR = new Creator<Bill>() {
@@ -175,6 +189,7 @@ public class Bill implements Parcelable {
         dest.writeString(price);
         dest.writeInt(time);
         dest.writeInt(idTicket);
-
+        dest.writeString(cancelDate);
+        dest.writeInt(status);
     }
 }

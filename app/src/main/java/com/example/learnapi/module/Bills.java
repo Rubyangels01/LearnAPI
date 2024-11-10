@@ -18,6 +18,7 @@ public class Bills implements Parcelable {
     @SerializedName("IDCustomer")
     private int idCustomer;
 
+
     public void setIdBill(int idBill) {
         this.idBill = idBill;
     }
