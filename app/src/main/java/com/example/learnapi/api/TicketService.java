@@ -30,7 +30,8 @@ public interface TicketService {
     );
     @GET("tickets/customer/{idUser}")
     Call<ResData> getBillofUser(@Path("idUser") int idUser);
-
+    @GET("tickets/customer/billrefund/{idUser}")
+    Call<ResData> getBillRefundofUser(@Path("idUser") int idUser);
     @POST("tickets/chair/{idChair}/room/{idRoom}")
     Call<ResData> UpdateChair(@Path("idChair") int idChair,@Path("idRoom") int idRoom,@Query("showDate") String showDate);
     @DELETE("tickets/chair/{idChair}/room/{idRoom}")
@@ -44,4 +45,12 @@ public interface TicketService {
 
     @GET("tickets/customer/{IDCustomer}/bill/{idBill}")
     Call<ResData> GetTicketByBill(@Path("IDCustomer") int IDCustomer, @Path("idBill") int idBill);
+    @GET("tickets/promotion/{idPromotion}")
+    Call<ResData> GetPromotion(@Path("idPromotion") int idPromotion);
+    @GET("tickets/promotions")
+    Call<ResData> GetVoucherByCondition(@Query("totalBill") String totalBill);
+    @PUT("tickets/bill_update/{idBill}")
+    Call<ResData> UpdateTimeRefund(@Path("idBill") int idBill,@Query("timeRefund") String timeRefund);
+    @GET("tickets/timerefund/bills/{idBill}")
+    Call<ResData> GetTimeRefund(@Path("idBill") int idBill);
 }

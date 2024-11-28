@@ -147,6 +147,46 @@ public class HomePageController extends baseController<Home_Activity, MovieRepos
         });
     }
 
+    public void GetBillCancelofUser(int idUser)
+    {
+
+        repository.GetBillRefundofUser(idUser,new Callback<ResData>() {
+
+            @Override
+            public void onResponse(Call<ResData> call, Response<ResData> response) {
+
+                if(response.isSuccessful())
+                {
+
+                    ResData resData = response.body();
+                    if(resData.getCode() == 200)
+                    {
+                        ArrayList<Bill> billList = dbHelper.convertToObject(resData,Bill.class);
+
+                        if(billList.isEmpty())
+                        {
+                            view.showAlertDialog("Bạn chưa có hoạt động nào!");
+                        }
+                        view.navigateToOrderCancelPage(billList);
+                    }
+                    else
+                    {
+                        view.getErr(resData.getCode() + "");
+                    }
+                }
+                else
+                {
+                    view.getErr(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResData> call, Throwable throwable) {
+
+            }
+        });
+    }
+
     public void checkUserLogin(Customer customer) {
         repository.checkLogin1(customer, new Callback<ResData>() {
             @Override

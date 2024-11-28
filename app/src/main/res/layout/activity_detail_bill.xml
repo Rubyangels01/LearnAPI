@@ -120,20 +120,22 @@
         android:id="@+id/tvPaymentMethodTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Phương thức thanh toán"
+        android:text="Voucher"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:fontFamily="@font/aldrich"
         android:layout_below="@+id/rlTransactionInfo"
         android:layout_marginTop="16dp"/>
 
     <TextView
-        android:id="@+id/tvSeeAll"
+        android:id="@+id/tvvouchername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ZALO Pay"
+        android:text="Giảm 15%"
         android:textSize="14sp"
         android:textColor="@color/white"
         android:textStyle="bold"
+        android:fontFamily="@font/aldrich"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/rlTransactionInfo"
         android:layout_marginTop="16dp"/>
@@ -142,8 +144,16 @@
         android:id="@+id/lvordered"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvSeeAll"/>
+        android:layout_below="@id/tvvouchername"/>
 
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lvordered"
 
+        android:backgroundTint="#21D533"
+        android:fontFamily="@font/aldrich"
+        android:text="CANCEL" />
 
 </RelativeLayout>

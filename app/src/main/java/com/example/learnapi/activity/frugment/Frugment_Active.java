@@ -23,6 +23,7 @@ public class Frugment_Active extends Fragment {
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
     private ArrayList<Bill> bills;
+    private ArrayList<Bill> billsRefund;
 
     @Nullable
     @Override
@@ -36,6 +37,11 @@ public class Frugment_Active extends Fragment {
         if (bundle != null) {
             bills = bundle.getParcelableArrayList("billList");
         }
+//        Bundle bundle1 = getArguments();
+//        if(bundle1 != null)
+//        {
+//            billsRefund = bundle1.getParcelableArrayList("billRefundList");
+//        }
 
         // Khởi tạo ViewPagerAdapter với dữ liệu
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, bills);

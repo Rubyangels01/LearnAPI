@@ -23,6 +23,9 @@ public class Voucher implements Parcelable {
     @SerializedName("Desciption")
     private String description;
 
+    @SerializedName("TotalBill")
+    private String totalBill;
+
 
     public Voucher() {
 
@@ -76,6 +79,14 @@ public class Voucher implements Parcelable {
         this.description = description;
     }
 
+    public String getTotalBill() {
+        return totalBill;
+    }
+
+    public void setTotalBill(String totalBill) {
+        this.totalBill = totalBill;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -89,6 +100,7 @@ public class Voucher implements Parcelable {
         long tmpenddDate = in.readLong();
         startDate = tmpstartDate != -1 ? new Date(tmpstartDate) : null;
         startDate = tmpenddDate != -1 ? new Date(tmpenddDate) : null;
+        totalBill = in.readString();
     }
 
     @Override
@@ -99,6 +111,7 @@ public class Voucher implements Parcelable {
         dest.writeString(description);
         dest.writeLong(startDate != null ? startDate.getTime() : -1); // Chuyển đổi releasedDate thành long
         dest.writeLong(endDate != null ? endDate.getTime() : -1);
+        dest.writeString(totalBill);
     }
 
     public static final Creator<Voucher> CREATOR = new Creator<Voucher>() {

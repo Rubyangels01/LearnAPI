@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/aldrich"
-        android:text="90000"
+        android:text="0"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -154,12 +154,12 @@
         app:layout_constraintTop_toBottomOf="@+id/seatLayoutContainer" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/totalfeeamountandseat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/aldrich"
-        android:text="140000"
+        android:text="0"
         android:textColor="@color/white"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -168,17 +168,18 @@
         app:layout_constraintTop_toBottomOf="@+id/total" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/feeamount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:fontFamily="@font/aldrich"
-        android:text="Giảm 15%"
-        android:textColor="@color/white"
+        android:text="0"
 
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/choose_voucher"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="428dp" />
+        app:layout_constraintTop_toBottomOf="@+id/seatLayoutContainer" />
 
     <TextView
         android:id="@+id/textView8"

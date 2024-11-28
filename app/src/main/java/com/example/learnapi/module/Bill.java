@@ -34,11 +34,18 @@ public class Bill implements Parcelable {
     private String price;
     @SerializedName("Time")
     private int time;
-    @SerializedName("CancelDate")
+    @SerializedName("TimeRefund")
     private String cancelDate;
-
+    @SerializedName("IDRoom")
+    private int idRoom;
+    @SerializedName("IDChair")
+    private int idChair;
     @SerializedName("Status") //(1 laf đã đặt success, 0 là cancel)
     private int status;
+    @SerializedName("IDPromotion") //(1 laf đã đặt success, 0 là cancel)
+    private int idPromotion;
+
+
     public Bill() {
 
     }
@@ -51,15 +58,14 @@ public class Bill implements Parcelable {
         this.nameRoom = nameRoom;
         this.total = total;
         this.payment = payment;
+
     }
 
     public int getIdTicket() {
         return idTicket;
     }
 
-    public int getIdCustomer() {
-        return idCustomer;
-    }
+
 
     public String getNamechair() {
         return namechair;
@@ -69,9 +75,7 @@ public class Bill implements Parcelable {
         return price;
     }
 
-    public int getTime() {
-        return time;
-    }
+
 
     public String getNameTheater() {
         return nameTheater;
@@ -85,25 +89,19 @@ public class Bill implements Parcelable {
         return idBill;
     }
 
-    public void setIdBill(int idBill) {
-        this.idBill = idBill;
-    }
+
 
     public String getShowdate() {
         return showdate;
     }
 
-    public void setShowdate(String showdate) {
-        this.showdate = showdate;
-    }
+
 
     public String getNameMovie() {
         return nameMovie;
     }
 
-    public void setNameMovie(String nameMovie) {
-        this.nameMovie = nameMovie;
-    }
+
 
     public String getTotal() {
         return total;
@@ -113,32 +111,32 @@ public class Bill implements Parcelable {
         this.total = total;
     }
 
-    public String getPayment() {
-        return payment;
-    }
+
 
     public void setPayment(String payment) {
         this.payment = payment;
     }
 
-    public void setIdCustomer(int idCustomer) {
-        this.idCustomer = idCustomer;
+
+
+    public int getIdPromotion() {
+        return idPromotion;
     }
 
-    public void setNameTheater(String nameTheater) {
-        this.nameTheater = nameTheater;
+    public void setIdPromotion(int idPromotion) {
+        this.idPromotion = idPromotion;
     }
 
-    public void setNameRoom(String nameRoom) {
-        this.nameRoom = nameRoom;
+    public void setCancelDate(String cancelDate) {
+        this.cancelDate = cancelDate;
     }
 
-    public String getCancelDate() {
-        return cancelDate;
+    public int getIdRoom() {
+        return idRoom;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public int getIdChair() {
+        return idChair;
     }
 
     protected Bill(Parcel in) {
@@ -156,6 +154,9 @@ public class Bill implements Parcelable {
         idTicket = in.readInt();
         cancelDate = in.readString();
         status = in.readInt();
+        idPromotion = in.readInt();
+        idRoom = in.readInt();
+        idChair = in.readInt();
     }
 
     public static final Creator<Bill> CREATOR = new Creator<Bill>() {
@@ -191,5 +192,8 @@ public class Bill implements Parcelable {
         dest.writeInt(idTicket);
         dest.writeString(cancelDate);
         dest.writeInt(status);
+        dest.writeInt(idPromotion);
+        dest.writeInt(idRoom);
+        dest.writeInt(idChair);
     }
 }

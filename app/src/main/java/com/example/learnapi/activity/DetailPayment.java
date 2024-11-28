@@ -35,6 +35,7 @@ import com.example.learnapi.module.Bills;
 import com.example.learnapi.module.Movie;
 import com.example.learnapi.module.Ticket2;
 import com.example.learnapi.module.Usersession;
+import com.example.learnapi.module.Voucher;
 import com.example.learnapi.setupgeneral.dbHelper;
 import com.example.learnapi.zalopay.Api.CreateOrder;
 
@@ -57,6 +58,7 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
     int numberchair = 0;
     int total = 0;
     Movie movie1;
+    Voucher voucher;
     Bill bill1 = new Bill();
     Bills bill2 = new Bills();
 
@@ -78,6 +80,8 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
             binding.tvnumberchair.setText(numberchair + " x seat");
             timeLeftInMillis = intent.getLongExtra("timeLeftInMillis", 0);
             movie1 = intent.getParcelableExtra("movie");
+            voucher = intent.getParcelableExtra("voucher");
+
 
         }
         Glide.with(this)
@@ -162,6 +166,7 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
                                 Bill bill = new Bill();
                                 bill.setPayment("Ví ZALOPay");
                                 bill.setTotal(String.valueOf(total));
+                                bill.setIdPromotion(voucher.getIdPromotion());
                                 controller.SaveBillOfUser(HomePageController.IDUser,bill);
                             }
 
@@ -170,6 +175,15 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
                                 Bill bill = new Bill();
                                 bill.setPayment("Ví ZALOPay");
                                 bill.setTotal(String.valueOf(total));
+                                if(voucher != null)
+                                {
+
+                                    bill.setIdPromotion(voucher.getIdPromotion());
+                                }
+
+
+
+
                                 bill1 = bill;
 
                                controller.SaveBillOfUser(HomePageController.IDUser,bill);

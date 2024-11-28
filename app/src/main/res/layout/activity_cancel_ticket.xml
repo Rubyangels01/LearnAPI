@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:padding="10dp"
-        android:text="HUỶ VÉ"
+        android:text="REFUND TICKET"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -44,7 +44,7 @@
         android:fontFamily="@font/aldrich"
         android:paddingTop="7dp"
         android:paddingBottom="7dp"
-        android:text="HUỶ VÉ THÀNH CÔNG"
+        android:text="Refund ticket successfully"
         android:textColor="@color/white"
         android:textSize="16sp"
 
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <TextView
-        android:id="@+id/releaseddate"
+        android:id="@+id/timerefund"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/aldrich"
@@ -76,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/releaseddate" />
+        app:layout_constraintTop_toBottomOf="@+id/timerefund" />
 
     <TextView
         android:id="@+id/textView10"
@@ -86,7 +86,7 @@
         android:fontFamily="@font/aldrich"
         android:paddingTop="7dp"
         android:paddingBottom="7dp"
-        android:text="THÔNG TIN VÉ"
+        android:text="TICKET INFORMATION"
         android:textColor="@color/white"
 
         android:textSize="16sp"
@@ -94,7 +94,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/releaseddate" />
+        app:layout_constraintTop_toBottomOf="@+id/timerefund" />
 
     <RelativeLayout
         android:id="@+id/rlTransactionInfo"
@@ -113,7 +113,7 @@
 
 
         <TextView
-            android:id="@+id/tvMerchantName"
+            android:id="@+id/namemovie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -124,10 +124,10 @@
 
 
         <TextView
-            android:id="@+id/tvOrderInfo"
+            android:id="@+id/nametheater"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvMerchantName"
+            android:layout_below="@+id/namemovie"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
 
@@ -154,7 +154,7 @@
             android:id="@+id/tvshowdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvOrderInfo"
+            android:layout_below="@+id/nametheater"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
@@ -171,7 +171,7 @@
         android:fontFamily="@font/aldrich"
         android:paddingTop="7dp"
         android:paddingBottom="7dp"
-        android:text="THÔNG TIN HOÀN VÉ"
+        android:text="TICKET REFUND INFORMATION"
         android:textColor="@color/white"
 
         android:textSize="16sp"
@@ -224,16 +224,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/feecancel" />
 
+    <TextView
+        android:id="@+id/anout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/aldrich"
+        android:paddingStart="10dp"
+
+        android:text="Note: The refund amount will be credited back to ZaloPay wallet within 24 hours."
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amountcancel" />
+
     <Button
         android:id="@+id/btn_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="44dp"
         android:backgroundTint="#21D533"
         android:fontFamily="@font/aldrich"
-        android:text="BACK"
-        app:layout_constraintTop_toBottomOf="@+id/amountcancel"
+        android:text="RETURM HOME"
+        app:layout_constraintTop_toBottomOf="@+id/anout"
         tools:layout_editor_absoluteX="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

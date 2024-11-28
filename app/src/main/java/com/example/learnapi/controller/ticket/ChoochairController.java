@@ -11,6 +11,7 @@ import com.example.learnapi.module.DateShow;
 import com.example.learnapi.module.ResData;
 import com.example.learnapi.module.Rooms;
 import com.example.learnapi.module.Theater;
+import com.example.learnapi.module.Voucher;
 import com.example.learnapi.repository.TicketRepository;
 import com.example.learnapi.setupgeneral.dbHelper;
 import com.google.gson.Gson;
@@ -54,7 +55,34 @@ public class ChoochairController extends baseController<ChooseChair, TicketRepos
             }
         });
     }
+    // lấy danh sachs voucher phù hợp với hoá đơn ngươi dùng
+    // lấy danh sách x
 
+    public void GetVoucherByCondition(String totalBill) {
+        repository.GetVoucherByCondition(totalBill, new Callback<ResData>() {
+            @Override
+            public void onResponse(Call<ResData> call, Response<ResData> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ResData resData = response.body();
+                    if (resData.getCode() == 200) {
+                        ArrayList<Voucher> vouchersList = dbHelper.convertToObject(resData,Voucher.class);
+
+                        view.GetVoucherList(vouchersList);
+
+                    }
+                } else {
+                    // Xử lý lỗi khi không thành công
+                    // (Thêm mã xử lý nếu cần)
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResData> call, Throwable throwable) {
+                // Xử lý lỗi khi gọi API thất bại
+                // (Thêm mã xử lý nếu cần)
+            }
+        });
+    }
     public void UpdateChair(int idChair, int idRoom, String showDate) {
         repository.UpdateChair(idChair,idRoom,showDate, new Callback<ResData>() {
             @Override

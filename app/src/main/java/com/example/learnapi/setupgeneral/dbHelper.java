@@ -11,6 +11,7 @@ import com.example.learnapi.module.TypeMovie;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 
@@ -31,7 +32,7 @@ import java.util.StringJoiner;
 
 public class dbHelper {
 
-    public static String PORT = "192.168.1.186";
+    public static String PORT = "172.20.10.3";
     public static <T> ArrayList<T> convertToObject(ResData resData, Class<T> clazz) {
         List<Object> dataList = (List<Object>) resData.getData(); // Assumed data is a list of objects
         ArrayList<T> listT = new ArrayList<>();
@@ -55,6 +56,22 @@ public class dbHelper {
         Gson gson = new Gson();
         return gson.fromJson(gson.toJson(resData.getData()), clazz);
     }
+
+    public static String getRefundTime(ResData resData) {
+        Gson gson = new Gson();
+
+        // Chuyển đổi `data` thành chuỗi JSON
+        String jsonArray = gson.toJson(resData.getData());
+
+        // Parse chuỗi JSON và lấy giá trị "timeRefund"
+        JsonArray array = JsonParser.parseString(jsonArray).getAsJsonArray();
+        if (array.size() > 0) {
+            JsonObject firstObject = array.get(0).getAsJsonObject();
+            return firstObject.get("timeRefund").getAsString();
+        }
+        return null; // Trường hợp không có dữ liệu
+    }
+
     public static String ConvertStringToDate(String dateStr) {
         SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());

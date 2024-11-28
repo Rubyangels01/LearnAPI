@@ -58,5 +58,22 @@ public class TicketRepository implements Repository{
     {
         ticketService.GetTicketByBill(idUser,idBill).enqueue(callback);
     }
+    public void GetPromotion(int idPromotion, Callback<ResData> callback)
+    {
+        ticketService.GetPromotion(idPromotion).enqueue(callback);
+    }
+    public void GetVoucherByCondition(String totalBill, Callback<ResData> callback)
+    {
+        ticketService.GetVoucherByCondition(totalBill).enqueue(callback);
+    }
+
+    public void UpdateTimeRefund(int idBill,String timeRefund, Callback<ResData> callback)
+    {
+        ticketService.UpdateTimeRefund(idBill,timeRefund).enqueue(callback);
+    }
+    public void GetTimeRefund(int idBill, Callback<ResData> callback)
+    {
+        ticketService.GetTimeRefund(idBill).enqueue(callback);
+    }
 
 }

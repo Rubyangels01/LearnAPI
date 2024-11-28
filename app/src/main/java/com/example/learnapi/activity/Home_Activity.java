@@ -131,6 +131,7 @@ public class Home_Activity extends baseActivity<HomePageController> implements N
         {
             replaceFragment(new Frugment_Active());
             controller.GetBillofUser(HomePageController.IDUser);
+            controller.GetBillCancelofUser(HomePageController.IDUser);
             currentFragment = FRAGMENT_ACTIVE;
         }else if(id == R.id.nav_account)
         {
@@ -194,6 +195,17 @@ public class Home_Activity extends baseActivity<HomePageController> implements N
         transaction.commit();
     }
     public void navigateToOrderingPage(ArrayList<Bill> bills) {
+        Fragment fragment = new Frugment_Active();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("billList", bills);
+        fragment.setArguments(bundle);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.content_frame, fragment);
+        transaction.addToBackStack(null); // Optional: Add to back stack for navigation history
+        transaction.commit();
+    }
+    public void navigateToOrderCancelPage(ArrayList<Bill> bills) {
         Fragment fragment = new Frugment_Active();
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("billList", bills);

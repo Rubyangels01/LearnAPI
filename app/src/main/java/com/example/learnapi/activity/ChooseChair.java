@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.learnapi.R;
@@ -58,6 +59,10 @@ public class ChooseChair extends baseActivity<ChoochairController> {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     public static List<Integer> listIDChair;
+    ArrayList<Voucher> voucherslist;
+    int feeamount = 0;
+    int totalVoucher = 0;
+    Voucher voucher = new Voucher();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +74,7 @@ public class ChooseChair extends baseActivity<ChoochairController> {
 
         context = this;
         binding.total.setText(String.valueOf(Sum));
-
+        voucherslist = new ArrayList<>();
         timeLeftInMillis = START_TIME_IN_MILLIS;
         startCountdownTimer(timeLeftInMillis);
 
@@ -99,11 +104,13 @@ public class ChooseChair extends baseActivity<ChoochairController> {
         binding.btnpayment.setOnClickListener(v -> {
             Intent intent1 = new Intent(ChooseChair.this, DetailPayment.class);
             intent1.putExtra("numberchair", coutchair);
-            intent1.putExtra("total", Sum);
+            int total = Integer.parseInt(binding.totalfeeamountandseat.getText().toString()) ;
+            intent1.putExtra("total", total);
             intent1.putExtra("nameSeat", nameSeat);
             intent1.putExtra("idSeat", idSeat);
             intent1.putExtra("timeLeftInMillis", timeLeftInMillis);
             intent1.putExtra("movie", movie);
+            intent1.putExtra("voucher",voucher);
             for(int i : listIDChair)
             {
                 controller.UpdateChair(i,idRoom,dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
@@ -169,16 +176,63 @@ public class ChooseChair extends baseActivity<ChoochairController> {
                         Sum = Sum + SetPrice();
                         coutchair = coutchair + 1;
                         binding.total.setText(String.valueOf(Sum));
+                        DisplayVoucher(String.valueOf(Sum));
+
+                       if(voucher != null)
+                       {
+                           binding.totalfeeamountandseat.setText(String.valueOf(Sum - (Sum * voucher.getPercentSell() / 100)));
+                           binding.feeamount.setText("- " +Sum * voucher.getPercentSell() / 100 + " ");
+                       }else {
+                           binding.totalfeeamountandseat.setText(Sum + "");
+                           binding.feeamount.setText("0");
+                       }
+
+                        if(Sum < totalVoucher)
+                        {
+                            voucher = null;
+                            feeamount = 0;
+                            binding.feeamount.setText("0");
+                            binding.chooseVoucher.setText("Chọn Voucher>");
+                            binding.totalfeeamountandseat.setText(String.valueOf(Sum));
+                        }
+                        if(feeamount == 0)
+                        {
+                            binding.totalfeeamountandseat.setText(String.valueOf(Sum));
+                        }
+
                         binding.coutchair.setText(coutchair + " seat");
                     } else {
                         seatImageView.setColorFilter(null); // Xóa màu
                         seatImageView.setSelected(false);
                         Sum = Sum - SetPrice();
-
-                        listIDChair.remove((Integer) chairId);
                         coutchair = coutchair - 1;
+                        listIDChair.remove((Integer) chairId);
+                        DisplayVoucher(String.valueOf(Sum));
+
+
                         binding.total.setText(String.valueOf(Sum));
-                        binding.coutchair.setText(coutchair + " seat");
+
+                        if(voucher != null)
+                        {
+                            binding.totalfeeamountandseat.setText(String.valueOf(Sum - (Sum * voucher.getPercentSell() / 100)));
+                            binding.feeamount.setText("- " +Sum * voucher.getPercentSell() / 100 + " ");
+                        }
+                        else {
+                            binding.totalfeeamountandseat.setText(Sum + "");
+                            binding.feeamount.setText("0");
+                        }
+                        if(Sum < totalVoucher)
+                        {
+                            voucher = null;
+                            feeamount = 0;
+                            binding.feeamount.setText("0");
+                            binding.chooseVoucher.setText("Chọn Voucher>");
+                            binding.totalfeeamountandseat.setText(String.valueOf(Sum));
+                        }
+                        if(feeamount == 0)
+                        {
+                            binding.totalfeeamountandseat.setText(String.valueOf(Sum));
+                        }
                     }
                     if (coutchair >= 1) {
                         binding.btnpayment.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.green));
@@ -249,54 +303,67 @@ public void setChair(int idseat, int idRoom, int status)
             public void onFinish() {
                 binding.tvCountdownTimer.setText("00:00");
                 showAlertDialog("Thời gian giữ chỗ đã hết, vui lòng thử lại.");
-//                if(!listIDChair.isEmpty())
-//                {
-//                    for(int i : listIDChair)
-//                    {
-//                        controller.DeleteStatusChair(i,idRoom,dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
-//                    }
-//                }
+
                 Intent intent = new Intent(ChooseChair.this, Home_Activity.class);
                 startActivity(intent);
             }
         }.start();
     }
-    public void ChooseVoucher()
-    {
+    public void ChooseVoucher() {
         binding.chooseVoucher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Dialog voucherDialog = new Dialog(ChooseChair.this);
                 voucherDialog.setContentView(R.layout.dialog_voucher);
                 voucherDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                // Tìm ListView trong dialog
+                DisplayVoucher(String.valueOf(Sum));
+                // Tìm ListView và TextView thông báo trong dialog
                 ListView voucherListView = voucherDialog.findViewById(R.id.voucherListView);
+                TextView noVoucherTextView = voucherDialog.findViewById(R.id.noVoucherTextView);
 
-                // Dữ liệu voucher mẫu (thay thế với dữ liệu thực tế)
-                ArrayList<Voucher> vouchers = new ArrayList<>();
-                Voucher voucher1 = new Voucher();
-                voucher1.setNamePromotion("GIẢM 10%");
-                vouchers.add(voucher1);
+                if (Sum != 0 && voucherslist != null && !voucherslist.isEmpty()) {
+                    // Nếu có voucher, hiển thị ListView và ẩn TextView thông báo
 
-                // Thiết lập adapter cho ListView
-                VoucherAdapter adapter = new VoucherAdapter(ChooseChair.this,vouchers);
-                voucherListView.setAdapter(adapter);
 
-                // Xử lý sự kiện khi chọn voucher
-                voucherListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Voucher selectedVoucher = vouchers.get(position);
-                        binding.chooseVoucher.setText("Đã chọn: " + selectedVoucher.getNamePromotion());
-                        voucherDialog.dismiss();
-                    }
-                });
+                    VoucherAdapter adapter = new VoucherAdapter(ChooseChair.this, voucherslist);
+                    voucherListView.setAdapter(adapter);
+                    noVoucherTextView.setVisibility(View.GONE); // Ẩn thông báo
+
+                    // Xử lý sự kiện khi chọn voucher
+                    voucherListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Voucher selectedVoucher = voucherslist.get(position);
+                            binding.chooseVoucher.setText(selectedVoucher.getNamePromotion());
+                            voucher = selectedVoucher;
+                            totalVoucher = Integer.parseInt(selectedVoucher.getTotalBill());
+                            feeamount = Sum * selectedVoucher.getPercentSell() / 100;
+                            binding.totalfeeamountandseat.setText(String.valueOf(Sum - feeamount));
+                            binding.feeamount.setText("- " +Sum * selectedVoucher.getPercentSell() / 100 + " ");
+                            voucherDialog.dismiss();
+                        }
+                    });
+                } else {
+                    // Nếu không có voucher, ẩn ListView và hiển thị TextView thông báo
+                    voucherListView.setVisibility(View.GONE);
+                    noVoucherTextView.setVisibility(View.VISIBLE);
+                }
 
                 // Hiển thị dialog
                 voucherDialog.show();
             }
         });
+    }
+
+    public void GetVoucherList(ArrayList<Voucher> vouchers)
+    {
+        voucherslist.clear();
+        voucherslist.addAll(vouchers);
+
+    }
+    public void DisplayVoucher(String totalBill)
+    {
+        controller.GetVoucherByCondition(totalBill);
     }
 
     @Override
