@@ -173,6 +173,19 @@ public class dbHelper {
             return null;
         }
     }
+
+    public static String FormatDateToType(String dateStr, String typecurrent, String typefomat) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat(typecurrent, Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat(typefomat, Locale.getDefault());
+
+        try {
+            Date date = inputFormat.parse(dateStr);
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public static <T> ArrayList<T> parseJsonArray(JsonObject jsonObject, String key, Class<T> clazz) {
         Gson gson = new Gson();
         JsonArray jsonArray = jsonObject.getAsJsonArray(key);

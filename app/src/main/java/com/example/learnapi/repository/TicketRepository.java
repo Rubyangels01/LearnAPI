@@ -62,9 +62,9 @@ public class TicketRepository implements Repository{
     {
         ticketService.GetPromotion(idPromotion).enqueue(callback);
     }
-    public void GetVoucherByCondition(String totalBill, Callback<ResData> callback)
+    public void GetVoucherByCondition(int idCustomer,String totalBill, Callback<ResData> callback)
     {
-        ticketService.GetVoucherByCondition(totalBill).enqueue(callback);
+        ticketService.GetVoucherByCondition(idCustomer,totalBill).enqueue(callback);
     }
 
     public void UpdateTimeRefund(int idBill,String timeRefund, Callback<ResData> callback)

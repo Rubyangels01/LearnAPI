@@ -47,8 +47,8 @@ public interface TicketService {
     Call<ResData> GetTicketByBill(@Path("IDCustomer") int IDCustomer, @Path("idBill") int idBill);
     @GET("tickets/promotion/{idPromotion}")
     Call<ResData> GetPromotion(@Path("idPromotion") int idPromotion);
-    @GET("tickets/promotions")
-    Call<ResData> GetVoucherByCondition(@Query("totalBill") String totalBill);
+    @GET("tickets/promotions/{idCustomer}")
+    Call<ResData> GetVoucherByCondition(@Path("idCustomer") int idCustomer,@Query("totalBill") String totalBill);
     @PUT("tickets/bill_update/{idBill}")
     Call<ResData> UpdateTimeRefund(@Path("idBill") int idBill,@Query("timeRefund") String timeRefund);
     @GET("tickets/timerefund/bills/{idBill}")

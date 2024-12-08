@@ -39,9 +39,11 @@ public class CancelTicket_Activity extends baseActivity<CancelTicketController> 
             binding.namemovie.setText(billcancel.getNameMovie());
             binding.nametheater.setText(billcancel.getNameTheater());
             binding.tvshowdate.setText(dbHelper.formatDate(billcancel.getShowdate()));
-           binding.amountticket.setText("Amount total: " + billcancel.getTotal());
-           binding.feecancel.setText("Fee Refund: " + Integer.parseInt(billcancel.getTotal()) * 15 / 100);
-           binding.amountcancel.setText("Refund amount: " + (Integer.parseInt(billcancel.getTotal()) - (Integer.parseInt(billcancel.getTotal()) * 15 / 100)));
+           binding.amountticket.setText("Amount total: " +dbHelper.ConvertPrice(billcancel.getTotal()));
+           int fee = Integer.parseInt(billcancel.getTotal()) * 15 / 100;
+           binding.feecancel.setText("Fee Refund: " + dbHelper.ConvertPrice(String.valueOf(fee)));
+           int totalcancel = (Integer.parseInt(billcancel.getTotal()) - (Integer.parseInt(billcancel.getTotal()) * 15 / 100));
+           binding.amountcancel.setText("Refund amount: " + dbHelper.ConvertPrice(String.valueOf(totalcancel)));
 
 
 

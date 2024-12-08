@@ -36,7 +36,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,9 +66,6 @@ public class DetailBill_Activity extends baseActivity<DetailBillController> {
             bill = intent.getParcelableExtra("bill");
             if (bill != null) {
                 idBill = bill.getIdBill();
-
-
-
                 controller.GetTicketByBill(HomePageController.IDUser,bill.getIdBill());
             }
             else
@@ -208,24 +207,37 @@ public class DetailBill_Activity extends baseActivity<DetailBillController> {
     {
         controller.GetPromotion(idPromotion);
     }
-    private void DisplayBtnCancel(Bill bill) {
-    try {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
 
-        Date showDate = dateFormat.parse(bill.getShowdate());
+    private boolean isCurrentTimeLessThan3Hours(String targetTime) {
+        try {
+            // Định dạng thời gian đầu vào
+            DateTimeFormatter formatter = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            }
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR_OF_DAY, 3);
-        Date currentTimePlus3Hours = calendar.getTime();
-        if (showDate.after(currentTimePlus3Hours)) {
-            binding.btnCancel.setVisibility(View.VISIBLE);
-        } else {
-            binding.btnCancel.setVisibility(View.GONE);
+            // Chuyển chuỗi thành LocalDateTime
+            LocalDateTime targetDateTime = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                targetDateTime = LocalDateTime.parse(targetTime, formatter);
+            }
+
+            // Lấy thời gian hiện tại
+            LocalDateTime currentDateTime = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                currentDateTime = LocalDateTime.now(ZoneId.systemDefault());
+            }
+
+            // Kiểm tra khoảng cách thời gian
+            long hoursDifference = 0;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                hoursDifference = ChronoUnit.HOURS.between(currentDateTime, targetDateTime);
+            }
+            return hoursDifference > 3; // Kiểm tra nếu nhỏ hơn 3 tiếng
+        } catch (Exception e) {
+            System.err.println("Lỗi khi xử lý thời gian: " + e.getMessage());
+            return false;
         }
-    } catch (ParseException e) {
-        e.printStackTrace();
-
-    }
     }
 
 
@@ -239,7 +251,15 @@ public class DetailBill_Activity extends baseActivity<DetailBillController> {
         binding.tvMerchantName.setText(bill.getNameMovie());
         binding.tvOrderInfo.setText(bill.getNameTheater());
         binding.tvshowdate.setText(dbHelper.formatDate(bill.getShowdate()));
-        DisplayBtnCancel(bill);
+        String date = dbHelper.FormatDateToType(bill.getShowdate(),"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'","dd/MM/yyyy HH:MM");
+        if(isCurrentTimeLessThan3Hours(date))
+        {
+            binding.btnCancel.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            binding.btnCancel.setVisibility(View.GONE);
+        }
         if (bill.getIdPromotion() != 0) {
             GetVoucher(bill);
         }

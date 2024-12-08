@@ -58,8 +58,8 @@ public class ChoochairController extends baseController<ChooseChair, TicketRepos
     // lấy danh sachs voucher phù hợp với hoá đơn ngươi dùng
     // lấy danh sách x
 
-    public void GetVoucherByCondition(String totalBill) {
-        repository.GetVoucherByCondition(totalBill, new Callback<ResData>() {
+    public void GetVoucherByCondition(int idCustomer,String totalBill) {
+        repository.GetVoucherByCondition(idCustomer,totalBill, new Callback<ResData>() {
             @Override
             public void onResponse(Call<ResData> call, Response<ResData> response) {
                 if (response.isSuccessful() && response.body() != null) {

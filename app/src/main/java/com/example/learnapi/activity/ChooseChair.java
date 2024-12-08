@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.example.learnapi.R;
 import com.example.learnapi.adapter.VoucherAdapter;
 import com.example.learnapi.controller.base.baseactivity.baseActivity;
+import com.example.learnapi.controller.movie.HomePageController;
 import com.example.learnapi.controller.ticket.ChoochairController;
 import com.example.learnapi.databinding.ActivityChooseChairBinding;
 import com.example.learnapi.module.Chairs;
@@ -363,7 +364,7 @@ public void setChair(int idseat, int idRoom, int status)
     }
     public void DisplayVoucher(String totalBill)
     {
-        controller.GetVoucherByCondition(totalBill);
+        controller.GetVoucherByCondition(HomePageController.IDUser,totalBill);
     }
 
     @Override

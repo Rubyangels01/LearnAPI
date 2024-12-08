@@ -131,7 +131,7 @@ public class Home_Activity extends baseActivity<HomePageController> implements N
         {
             replaceFragment(new Frugment_Active());
             controller.GetBillofUser(HomePageController.IDUser);
-            controller.GetBillCancelofUser(HomePageController.IDUser);
+           // controller.GetBillCancelofUser(HomePageController.IDUser);
             currentFragment = FRAGMENT_ACTIVE;
         }else if(id == R.id.nav_account)
         {
