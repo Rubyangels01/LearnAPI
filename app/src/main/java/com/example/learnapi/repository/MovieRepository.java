@@ -19,9 +19,9 @@ public class MovieRepository implements Repository {
     MovieService movieService;
     UserService userService;
     TicketService ticketService;
-     String baseUrl = "http://"+ PORT + ":3002/";
-     String baseUrl2 = "http://"+ PORT + ":3000/";
-     String baseUrl3 = "http://"+ PORT + ":3004/";
+     String baseUrl = "http://"+ PORT + ":3003/";
+     String baseUrl2 = "http://"+ PORT + ":3001/";
+     String baseUrl3 = "http://"+ PORT + ":3005/";
     public MovieRepository()
     {
         this.movieService = RetrofitClient.getClient(baseUrl).create(MovieService.class);
