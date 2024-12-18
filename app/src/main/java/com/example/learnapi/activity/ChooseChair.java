@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -105,16 +106,16 @@ public class ChooseChair extends baseActivity<ChoochairController> {
         binding.btnpayment.setOnClickListener(v -> {
             Intent intent1 = new Intent(ChooseChair.this, DetailPayment.class);
             intent1.putExtra("numberchair", coutchair);
-            int total = Integer.parseInt(binding.totalfeeamountandseat.getText().toString()) ;
+            int total = Integer.parseInt(binding.totalfeeamountandseat.getText().toString());
+            System.out.println("@@1: " + binding.totalfeeamountandseat.getText().toString());
             intent1.putExtra("total", total);
             intent1.putExtra("nameSeat", nameSeat);
             intent1.putExtra("idSeat", idSeat);
             intent1.putExtra("timeLeftInMillis", timeLeftInMillis);
             intent1.putExtra("movie", movie);
-            intent1.putExtra("voucher",voucher);
-            for(int i : listIDChair)
-            {
-                controller.UpdateChair(i,idRoom,dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
+            intent1.putExtra("voucher", voucher);
+            for (int i : listIDChair) {
+                controller.UpdateChair(i, idRoom, dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
             }
 
             startActivity(intent1);
@@ -156,8 +157,7 @@ public class ChooseChair extends baseActivity<ChoochairController> {
 
                 seatLayoutParams.setMargins(4, 0, 4, 0); // Điều chỉnh khoảng cách giữa các ghế
                 seatImageView.setLayoutParams(seatLayoutParams);
-                if(chair.getStatus() == 1)
-                {
+                if (chair.getStatus() == 1) {
                     seatImageView.setEnabled(false);
                     seatImageView.setColorFilter(ContextCompat.getColor(context, R.color.red), PorterDuff.Mode.SRC_IN);
                 }
@@ -179,25 +179,22 @@ public class ChooseChair extends baseActivity<ChoochairController> {
                         binding.total.setText(String.valueOf(Sum));
                         DisplayVoucher(String.valueOf(Sum));
 
-                       if(voucher != null)
-                       {
-                           binding.totalfeeamountandseat.setText(String.valueOf(Sum - (Sum * voucher.getPercentSell() / 100)));
-                           binding.feeamount.setText("- " +Sum * voucher.getPercentSell() / 100 + " ");
-                       }else {
-                           binding.totalfeeamountandseat.setText(Sum + "");
-                           binding.feeamount.setText("0");
-                       }
+                        if (voucher != null) {
+                            binding.totalfeeamountandseat.setText(String.valueOf(Sum - (Sum * voucher.getPercentSell() / 100)));
+                            binding.feeamount.setText("- " + Sum * voucher.getPercentSell() / 100 + " ");
+                        } else {
+                            binding.totalfeeamountandseat.setText(Sum + "");
+                            binding.feeamount.setText("0");
+                        }
 
-                        if(Sum < totalVoucher)
-                        {
+                        if (Sum < totalVoucher) {
                             voucher = null;
                             feeamount = 0;
                             binding.feeamount.setText("0");
                             binding.chooseVoucher.setText("Chọn Voucher>");
                             binding.totalfeeamountandseat.setText(String.valueOf(Sum));
                         }
-                        if(feeamount == 0)
-                        {
+                        if (feeamount == 0) {
                             binding.totalfeeamountandseat.setText(String.valueOf(Sum));
                         }
 
@@ -213,28 +210,26 @@ public class ChooseChair extends baseActivity<ChoochairController> {
 
                         binding.total.setText(String.valueOf(Sum));
 
-                        if(voucher != null)
-                        {
+                        if (voucher != null) {
                             binding.totalfeeamountandseat.setText(String.valueOf(Sum - (Sum * voucher.getPercentSell() / 100)));
-                            binding.feeamount.setText("- " +Sum * voucher.getPercentSell() / 100 + " ");
-                        }
-                        else {
+                            binding.feeamount.setText("- " + Sum * voucher.getPercentSell() / 100 + " ");
+                        } else {
                             binding.totalfeeamountandseat.setText(Sum + "");
                             binding.feeamount.setText("0");
                         }
-                        if(Sum < totalVoucher)
-                        {
+                        if (Sum < totalVoucher) {
                             voucher = null;
                             feeamount = 0;
                             binding.feeamount.setText("0");
                             binding.chooseVoucher.setText("Chọn Voucher>");
                             binding.totalfeeamountandseat.setText(String.valueOf(Sum));
                         }
-                        if(feeamount == 0)
-                        {
+                        if (feeamount == 0) {
                             binding.totalfeeamountandseat.setText(String.valueOf(Sum));
                         }
                     }
+                    System.out.println("@@2: " + binding.totalfeeamountandseat.getText().toString());
+                    Log.d("Chair Selection", "Total fee and seat: " + binding.totalfeeamountandseat.getText().toString());
                     if (coutchair >= 1) {
                         binding.btnpayment.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.green));
                         binding.btnpayment.setEnabled(true);
@@ -254,10 +249,9 @@ public class ChooseChair extends baseActivity<ChoochairController> {
         controller.GetRoomBySchedule(getTheaterIdByName(nameTheater), timeShow, movie.getIdMovie());
     }
 
-public void setChair(int idseat, int idRoom, int status)
-{
+    public void setChair(int idseat, int idRoom, int status) {
 
-}
+    }
 
     public int SetPrice() {
         int price = 0;
@@ -271,7 +265,7 @@ public void setChair(int idseat, int idRoom, int status)
 
     public void DisplayRoom(Rooms rooms) {
         binding.namescreen.setText("Room " + rooms.getNameRoom());
-        controller.GetAllChairs(rooms.getIdRoom(),dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
+        controller.GetAllChairs(rooms.getIdRoom(), dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
     }
 
     public static Rooms getRoom(Rooms rooms) {
@@ -310,6 +304,7 @@ public void setChair(int idseat, int idRoom, int status)
             }
         }.start();
     }
+
     public void ChooseVoucher() {
         binding.chooseVoucher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -340,7 +335,7 @@ public void setChair(int idseat, int idRoom, int status)
                             totalVoucher = Integer.parseInt(selectedVoucher.getTotalBill());
                             feeamount = Sum * selectedVoucher.getPercentSell() / 100;
                             binding.totalfeeamountandseat.setText(String.valueOf(Sum - feeamount));
-                            binding.feeamount.setText("- " +Sum * selectedVoucher.getPercentSell() / 100 + " ");
+                            binding.feeamount.setText("- " + Sum * selectedVoucher.getPercentSell() / 100 + " ");
                             voucherDialog.dismiss();
                         }
                     });
@@ -356,15 +351,14 @@ public void setChair(int idseat, int idRoom, int status)
         });
     }
 
-    public void GetVoucherList(ArrayList<Voucher> vouchers)
-    {
+    public void GetVoucherList(ArrayList<Voucher> vouchers) {
         voucherslist.clear();
         voucherslist.addAll(vouchers);
 
     }
-    public void DisplayVoucher(String totalBill)
-    {
-        controller.GetVoucherByCondition(HomePageController.IDUser,totalBill);
+
+    public void DisplayVoucher(String totalBill) {
+        controller.GetVoucherByCondition(HomePageController.IDUser, totalBill);
     }
 
     @Override
@@ -386,9 +380,8 @@ public void setChair(int idseat, int idRoom, int status)
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        for(int i : listIDChair)
-        {
-            controller.DeleteStatusChair(i,idRoom,dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
+        for (int i : listIDChair) {
+            controller.DeleteStatusChair(i, idRoom, dbHelper.ConvertStringToDate(showDate) + " " + hourDate);
         }
     }
 }

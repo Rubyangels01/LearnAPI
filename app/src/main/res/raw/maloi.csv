@@ -1,0 +1,6 @@
+﻿id,mess
+400,Lỗi eata
+404,Lỗi gửi sai method
+200,Lấy dữ liệu thành công
+201,Thêm dữ liệu thành công
+500,Lỗi server

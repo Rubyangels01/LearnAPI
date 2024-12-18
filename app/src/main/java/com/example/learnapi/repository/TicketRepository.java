@@ -16,7 +16,7 @@ import retrofit2.http.Body;
 
 public class TicketRepository implements Repository{
     TicketService ticketService;
-    String baseUrl = "http://"+ PORT + ":3005/";
+    String baseUrl = "http://"+ PORT + ":3004/";
     public TicketRepository()
     {
         this.ticketService = RetrofitClient.getClient(baseUrl).create(TicketService.class);

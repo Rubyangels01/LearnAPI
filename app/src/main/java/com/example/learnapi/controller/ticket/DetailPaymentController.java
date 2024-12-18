@@ -24,11 +24,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailPaymentController  extends baseController<DetailPayment, TicketRepository> {
-public DetailPaymentController(DetailPayment activity)
-        {
+    public DetailPaymentController(DetailPayment activity)
+    {
         this.view = activity;
         this.repository = new TicketRepository();
-        }
+    }
 
     public void SaveBillOfUser(int idUser, Bill bill) {
 
@@ -42,7 +42,7 @@ public DetailPaymentController(DetailPayment activity)
                         Gson gson = new Gson();
                         Bills bill = gson.fromJson(gson.toJson(resData.getData()), Bills.class);
                         view.getBill(bill);
-                       view.SaveTicket(bill.getIdBill());
+                        view.SaveTicket(bill.getIdBill());
 
                     }
                 } else {
@@ -82,6 +82,6 @@ public DetailPaymentController(DetailPayment activity)
     }
 
     private List<Integer> getListIDChair() {
-    return listIDChair;
+        return listIDChair;
     }
 }

@@ -21,6 +21,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -76,6 +77,7 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
         if (intent != null) {
             numberchair = intent.getIntExtra("numberchair", 0);
             total = intent.getIntExtra("total", 0);
+            System.out.println("@@3: " + total);
             binding.tvcountticket.setText(numberchair + " Vé");
             binding.tvnumberchair.setText(numberchair + " x seat");
             timeLeftInMillis = intent.getLongExtra("timeLeftInMillis", 0);
@@ -118,6 +120,7 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
                 showAlertDialog("Thời gian giữ chỗ đã hết, vui lòng thử lại.");
                 Intent intent = new Intent(DetailPayment.this, Home_Activity.class);
                 startActivity(intent);
+                finish();
             }
         }.start();
     }
@@ -147,7 +150,7 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
         builder.setTitle("Thông báo");
         builder.setMessage(message);
 
-        // Nút OK
+        // Nút OK //
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -155,8 +158,7 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
                 try {
                     JSONObject data = orderApi.createOrder(String.valueOf(total));
                     String code = data.getString("return_code");
-
-
+                    Log.d("DUY","@@: " + total);
                     if (code.equals("1")) {
 
                         String token = data.getString("zp_trans_token");
@@ -186,8 +188,8 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
 
                                 bill1 = bill;
 
-                               controller.SaveBillOfUser(HomePageController.IDUser,bill);
-                               // showAlertDialog("Vé bị huỷ do thanh toán không thành công");
+                                controller.SaveBillOfUser(HomePageController.IDUser,bill);
+                                // showAlertDialog("Vé bị huỷ do thanh toán không thành công");
 
                             }
 
@@ -245,18 +247,18 @@ public class DetailPayment extends baseActivity<DetailPaymentController> {
         controller.SaveTicketOfUser(ticket2);
     }
 
-public Bills getBill(Bills bill)
-{
-    bill2 = bill;
-    return  bill2;
+    public Bills getBill(Bills bill)
+    {
+        bill2 = bill;
+        return  bill2;
 
-}
+    }
     public void IntentDetailTicket() {
 
         Intent intent = new Intent(DetailPayment.this, DetailBill_Activity.class);
         intent.putExtra("bill",bill2);
-        
-        startActivity(intent);
 
+        startActivity(intent);
+finish();
     }
 }

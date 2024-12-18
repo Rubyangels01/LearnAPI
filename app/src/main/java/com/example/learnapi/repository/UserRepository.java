@@ -20,7 +20,7 @@ public class UserRepository implements Repository {
 
 
     public UserRepository() {
-        String baseUrl = "http://"+ PORT + ":3001/";
+        String baseUrl = "http://"+ PORT + ":3000/";
 
         this.userService = RetrofitClient.getClient(baseUrl).create(UserService.class);
     }
